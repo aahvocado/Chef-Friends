@@ -5,22 +5,21 @@ using UnityEngine;
 public class DeckController {
 	public int defaultDeckSize = 5;
 
-	private List<CardController> deck;
+	private List<CardController> deckList;
 
-	// Use this for initialization
-	void Start () {
+	public DeckController () {
     	createDeck();
 	}
 
 	// Creates a Deck and creates the cards to populate the list
 	public List<CardController> createDeck () {
-		deck = new List<CardController>();
-		for (var i = 0; i < defaultDeckSize; i++) {
-			var newId = i + "";
-			var newCard = createCard(newId);
-			deck.Add(newCard);
-		}
-		return deck;
+		deckList = new List<CardController>();
+		for (int i = 0; i < defaultDeckSize; i++) {
+			string newId = i + "";
+			CardController newCard = createCard(newId);
+			deckList.Add(newCard);
+		};
+		return deckList;
 	}
 
 	// Creates a new CardController and adds it to the deck
@@ -28,5 +27,9 @@ public class DeckController {
 		CardController newCard = new CardController();
 		newCard.setId(newId);
 		return newCard;
+	}
+
+	public List<CardController> getDeck() {
+		return deckList;
 	}
 }

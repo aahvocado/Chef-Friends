@@ -1,0 +1,696 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"noes",
+				"nodesList"
+			],
+			[
+				"random",
+				"randomIdx"
+			],
+			[
+				"re",
+				"renderedKnocks"
+			],
+			[
+				"current",
+				"currentKnockCount"
+			],
+			[
+				"nex",
+				"nextHouse"
+			],
+			[
+				"selec",
+				"selectedHouse"
+			],
+			[
+				"di",
+				"disableNext"
+			],
+			[
+				"House",
+				"HOUSE_IDS"
+			],
+			[
+				"handle",
+				"handleNextHouseclick"
+			],
+			[
+				"GENERIC",
+				"GENERIC_KID"
+			],
+			[
+				"SKILL_",
+				"SKILL_IDS"
+			],
+			[
+				"make",
+				"makeNewHouse"
+			],
+			[
+				"near",
+				"nearbyTags"
+			],
+			[
+				"StoryNod",
+				"StoryNodesContent"
+			],
+			[
+				"var",
+				"variant"
+			],
+			[
+				"makenew",
+				"makeNewMap"
+			],
+			[
+				"eure",
+				"eurecaClient"
+			],
+			[
+				"font-s",
+				"font-size"
+			],
+			[
+				"spect",
+				"SpectatorCtrl"
+			],
+			[
+				"selecte",
+				"selectedIndex"
+			],
+			[
+				"data",
+				"dataCreator"
+			],
+			[
+				"a",
+				"AutoInput"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 400.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"syntax",
+				"Set Syntax: C#"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"c#",
+				"Set Syntax: C#"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"syntax c",
+				"Set Syntax: C#"
+			],
+			[
+				"remove ",
+				"Package Control: Remove Package"
+			],
+			[
+				"unity",
+				"Set Syntax: Unity C#"
+			],
+			[
+				"babel",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"htmlpr",
+				"HTMLPrettify"
+			],
+			[
+				"isntall",
+				"Package Control: Install Package"
+			],
+			[
+				"jsformat",
+				"JSCS Formatter: Format this file"
+			],
+			[
+				"syntax bab",
+				"Set Syntax: JavaScript (Babel)"
+			],
+			[
+				"format",
+				"Format: Javascript"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"in",
+				"Package Control: Install Package"
+			],
+			[
+				"syntax: babl",
+				"Set Syntax: JavaScript (Babel)"
+			]
+		],
+		"width": 462.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/Users/nxiao/Dev/Chef-Friends",
+		"/Users/nxiao/Dev/Chef-Friends/Assets",
+		"/Users/nxiao/Dev/Chef-Friends/Assets/Scripts",
+		"/Users/nxiao/Dev/Chef-Friends/Assets/Scripts/Constants",
+		"/Users/nxiao/Dev/Chef-Friends/Assets/Scripts/Controllers",
+		"/Users/nxiao/Dev/Chef-Friends/Assets/Scripts/View"
+	],
+	"file_history":
+	[
+		"/Users/nxiao/Github/SuperPerspective/superperspective-sublimeproject.sublime-workspace",
+		"/Users/nxiao/Github/SuperPerspective/superperspective-sublimeproject.sublime-project",
+		"/Users/nxiao/Dev/Chef-Friends/Assets/Scripts/Constants/CardConstants.cs",
+		"/Users/nxiao/Dev/Chef-Friends/Assets/Scripts/CardController.cs",
+		"/Users/nxiao/Dev/Chef-Friends/Assets/Scripts/DeckController.cs",
+		"/Users/nxiao/Dev/Chef-Friends/Assets/Scripts/PlayerController.cs",
+		"/Users/nxiao/Dev/Chef-Friends/Assets/Scripts/GameInstantiator.cs",
+		"/Users/nxiao/Dev/Chef-Friends/Assets/Scripts/GameController.cs",
+		"/Users/nxiao/Dev/Chef-Friends/.gitignore",
+		"/Users/nxiao/Github/Chef-Friends/Assets/Scenes/EngineDemo.unity.meta",
+		"/Users/nxiao/Github/Chef-Friends/Assets/Scripts.meta",
+		"/Users/nxiao/Github/Chef-Friends/Assets/Scenes.meta",
+		"/Users/nxiao/Github/Chef-Friends/Assets/Prefabs.meta",
+		"/Users/nxiao/Github/spooky-treats/src/content/storynodes/KnockTutorialStory.js",
+		"/Users/nxiao/Github/spooky-treats/src/content/storynodes/TutorialStory.js",
+		"/Users/nxiao/Github/spooky-treats/src/content/StoryNodesContent.js",
+		"/private/var/folders/6h/3zrq398x7v75g8kdrpp8gcmw0000gn/T/007.jpg",
+		"/Users/nxiao/Github/spooky-treats/src/views/CandyDisplay.js",
+		"/Users/nxiao/Github/spooky-treats/src/content/MapHouseContent.js",
+		"/Users/nxiao/Github/spooky-treats/src/content/Constants.js",
+		"/Users/nxiao/Github/spooky-treats/src/views/CandyMap.js",
+		"/Users/nxiao/Github/spooky-treats/src/controllers/Utility.js",
+		"/Users/nxiao/Documents/patient teapot (16B70784) – Public.asc",
+		"/Users/nxiao/Documents/address-dnm.txt.gpg",
+		"/Users/nxiao/Github/spooky-treats/src/styles/components/KnockVisualizer.scss",
+		"/Users/nxiao/Github/spooky-treats/src/components/KnockVisualizer.js",
+		"/Users/nxiao/Github/spooky-treats/src/styles/Mixins.scss",
+		"/Users/nxiao/Github/spooky-treats/src/styles/components/MapHouse.scss",
+		"/Users/nxiao/Github/spooky-treats/src/styles/views/CandyDisplay.scss",
+		"/Users/nxiao/Github/spooky-treats/src/styles/views/CandyMap.scss",
+		"/Users/nxiao/Github/spooky-treats/src/styles/components/DisplayButton.scss",
+		"/Users/nxiao/Github/spooky-treats/src/components/MapHouse.js",
+		"/Users/nxiao/Github/spooky-treats/src/controllers/StoryNodes.js",
+		"/Users/nxiao/Github/spooky-treats/src/controllers/GameController.js",
+		"/Users/nxiao/Github/spooky-treats/src/controllers/CandyItemManager.js",
+		"/Users/nxiao/Github/spooky-treats/src/controllers/MapMaker.js",
+		"/Users/nxiao/Github/spooky-treats/node_modules/acorn/dist/acorn.es.js",
+		"/Users/nxiao/Github/spooky-treats/src/styles/App.scss",
+		"/Users/nxiao/Github/spooky-treats/src/styles/views/CandyStatusBar.scss",
+		"/Users/nxiao/Github/spooky-treats/src/styles/views/CandyInventory.scss",
+		"/Users/nxiao/Github/spooky-treats/src/content/SkillsContent.js",
+		"/Users/nxiao/Github/spooky-treats/src/controllers/SkillEffectsManager.js",
+		"/Users/nxiao/Github/spooky-treats/src/content/CandyItemContent.js",
+		"/Users/nxiao/Github/spooky-treats/src/styles/views/CandySkills.scss",
+		"/Users/nxiao/Github/spooky-treats/src/views/CandyStatusBar.js",
+		"/Users/nxiao/Github/spooky-treats/src/views/CandySkills.js",
+		"/Users/nxiao/Github/spooky-treats/package.json",
+		"/Users/nxiao/Github/spooky-treats/src/styles/css/views/CandyStatusBar.scss",
+		"/Users/nxiao/Github/spooky-treats/src/views/CandyInventory.js",
+		"/Users/nxiao/Github/spooky-treats/src/components/CandyItem.js",
+		"/Users/nxiao/Github/spooky-treats/src/styles/components/CandyItem.scss",
+		"/Users/nxiao/Github/spooky-treats/src/components/DisplayButton.js",
+		"/Users/nxiao/Github/spooky-treats/src/pages/StoryNodes.js",
+		"/Users/nxiao/Github/spooky-treats/src/components/player/CardHolder.js",
+		"/Users/nxiao/Github/spooky-treats/src/App.js",
+		"/Users/nxiao/Github/superperspective-site/src/styles/shared.scss",
+		"/Users/nxiao/Github/superperspective-site/src/styles/button.scss",
+		"/Users/nxiao/Github/superperspective-site/src/styles/app.scss",
+		"/Users/nxiao/Github/superperspective-web/src/client/app/styles/index.less",
+		"/Users/nxiao/Github/elementten2017/src/Pages/Page.js",
+		"/Users/nxiao/Github/spooky-treats/.gitignore",
+		"/Users/nxiao/Github/spooky-treats/src/styles/views/CandyInventory.js",
+		"/Users/nxiao/Dropbox/Miscellaneous/Ukulele Chords/heart-and-soul_chords.txt",
+		"/Users/nxiao/Dropbox/Miscellaneous/Ukulele Chords/strangers-like-me.txt",
+		"/Users/nxiao/Dropbox/Miscellaneous/Ukulele Chords/alltheprettygirls.txt",
+		"/Users/nxiao/Dropbox/Miscellaneous/Ukulele Chords/liability.txt",
+		"/Users/nxiao/Dropbox/Miscellaneous/Ukulele Chords/dont-know-why-i-didnt-come.txt",
+		"/Users/nxiao/Dropbox/Miscellaneous/Ukulele Chords/stardust.txt",
+		"/C/Users/Decks/AppData/Local/Temp/Rar$DIa0.404/README.txt",
+		"/C/Users/Decks/Documents/Git Projects/SuperPerspective/SuperPerspective/Assets/Scripts/Objects/heart-and-soul",
+		"/C/Users/Decks/Documents/Git Projects/SuperPerspective/.gitignore",
+		"/C/Users/Decks/Documents/Git Projects/SuperPerspective/SuperPerspective/Assets/Scripts/Objects/MobilePlatform.cs",
+		"/C/Users/Decks/Documents/Git Projects/superperspective-web/src/client/index.html",
+		"/C/Users/Decks/Documents/Git Projects/superperspective-web/webpack.config.js",
+		"/C/Users/Decks/Documents/Git Projects/superperspective-web/package.json",
+		"/C/Users/Decks/Documents/Git Projects/superperspective-web/src/client/app/index.html",
+		"/C/Users/Decks/Documents/Git Projects/superperspective-web/src/index.html",
+		"/C/Users/Decks/Documents/Git Projects/superperspective-web/src/index.js",
+		"/C/Users/Decks/Documents/Git Projects/superperspective-web/Gruntfile.js",
+		"/C/Users/Decks/Documents/Git Projects/superperspective-web/.babelrc",
+		"/C/Users/Decks/.bash_profile",
+		"/H/.bash_profile",
+		"/C/Users/Decks/Documents/Git Projects/tntgame/server.js",
+		"/C/Users/Decks/Downloads/FightOptimizer.ash",
+		"/C/Users/Decks/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/.gitignore",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/package.json",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/source/main.js",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/source/scripts/KeyHandler.jsx",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/source/scripts/DataService.js",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/source/styles/main.less",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/source/Index.jsx",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/devserver_files/index.html",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/README.md",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/source/scripts/AutoInput.jsx",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/source/scripts/example.js",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/server.config.js",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/source/scripts/Index.jsx",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/webpack.config.js",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/node_modules/faker/build/build/faker.js",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/source/scripts/data/fakeData.js",
+		"/C/Users/Decks/Downloads/mark43-frontend-takehome - Copy/takehome-test-frontend/source/main.js",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/node_modules/faker/vendor/password-generator.js",
+		"/C/Users/Decks/Downloads/mark43-frontend-takehome/takehome-test-frontend/package.json",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/.babelrc",
+		"/C/Users/Decks/Documents/Major Projects/Mark43-Takehome/node_modules/faker/package.json",
+		"/C/Users/Decks/Documents/Major Projects/react-hello-world/src/client/app/index.jsx",
+		"/C/Users/Decks/.bash_history"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 104.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"new",
+			"CardController",
+			"PlayerControllerI",
+			"GameInstantiatorInstance",
+			"PlayerControllerInstance",
+			"GameInstantiator",
+			"Instance",
+			"GameController",
+			"SomeClass",
+			"instance"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 25.0
+	},
+	"input":
+	{
+		"height": 37.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "Chef-Friends.sublime-project",
+	"replace":
+	{
+		"height": 72.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"gameinstan",
+				"Assets/Scripts/GameInstantiator.cs"
+			],
+			[
+				"storynodes.js",
+				"src/controllers/StoryNodes.js"
+			],
+			[
+				"candydis",
+				"src/views/CandyDisplay.js"
+			],
+			[
+				"maphouseconte",
+				"src/content/MapHouseContent.js"
+			],
+			[
+				"maphouse.js",
+				"src/components/MapHouse.js"
+			],
+			[
+				"storynode",
+				"src/content/StoryNodesContent.js"
+			],
+			[
+				"story",
+				"src/controllers/StoryNodes.js"
+			],
+			[
+				"utility.s",
+				"src/controllers/Utility.js"
+			],
+			[
+				"utility",
+				"src/controllers/Utility.js"
+			],
+			[
+				"storynodes",
+				"src/controllers/StoryNodes.js"
+			],
+			[
+				"gamecon",
+				"src/controllers/GameController.js"
+			],
+			[
+				"maphouse",
+				"src/components/MapHouse.js"
+			],
+			[
+				"candydispl",
+				"src/views/CandyDisplay.js"
+			],
+			[
+				"constants.js",
+				"src/content/Constants.js"
+			],
+			[
+				"mapmaker",
+				"src/controllers/MapMaker.js"
+			],
+			[
+				"candymap.js",
+				"src/views/CandyMap.js"
+			],
+			[
+				"candymapscss",
+				"src/styles/views/CandyMap.scss"
+			],
+			[
+				"itemmanager",
+				"src/controllers/CandyItemManager.js"
+			],
+			[
+				"storycontent",
+				"src/content/StoryNodesContent.js"
+			],
+			[
+				"skilleffe",
+				"src/controllers/SkillEffectsManager.js"
+			],
+			[
+				"mixins.",
+				"src/styles/Mixins.scss"
+			],
+			[
+				"candyinv",
+				"src/views/CandyInventory.js"
+			],
+			[
+				"display",
+				"src/components/DisplayButton.js"
+			],
+			[
+				"gamecont",
+				"src/controllers/GameController.js"
+			],
+			[
+				"utility.js",
+				"src/controllers/Utility.js"
+			],
+			[
+				"mapmaker.js",
+				"src/controllers/MapMaker.js"
+			],
+			[
+				"gamecontr",
+				"src/controllers/GameController.js"
+			],
+			[
+				"mapmak",
+				"src/controllers/MapMaker.js"
+			],
+			[
+				"mobileplatforms",
+				"Assets\\Scripts\\Objects\\MobilePlatformSpawn.cs"
+			],
+			[
+				"platform.cs",
+				"Assets\\Scripts\\Objects\\MobilePlatform.cs"
+			],
+			[
+				"orb.cs",
+				"Assets\\Scripts\\Objects\\Orb.cs"
+			],
+			[
+				"platform",
+				"Assets\\Scripts\\Objects\\PlatformWobble.cs"
+			],
+			[
+				"orbdrop",
+				"Assets\\Scripts\\Objects\\OrbDropPedestal.cs"
+			],
+			[
+				"edgemanager",
+				"Assets\\Scripts\\GameManager\\Edge Scripts\\EdgeManager.cs"
+			],
+			[
+				"door.cs",
+				"Assets\\Scripts\\Objects\\Door.cs"
+			],
+			[
+				"islandcontro",
+				"Assets\\Scripts\\GameManager\\IslandControl.cs"
+			],
+			[
+				"levelgeom",
+				"Assets\\Scripts\\Abstract\\LevelGeometry.cs"
+			],
+			[
+				"activeinter",
+				"Assets\\Scripts\\Abstract\\ActiveInteractable.cs"
+			],
+			[
+				"mobilep",
+				"Assets\\Scripts\\Objects\\MobilePlatform.cs"
+			],
+			[
+				"playercontrol",
+				"Assets\\Scripts\\Player\\PlayerController.cs"
+			],
+			[
+				"playerspawnc",
+				"Assets\\Scripts\\Player\\PlayerSpawnController.cs"
+			],
+			[
+				"spectator",
+				"www\\js\\tnt-spectator.js"
+			],
+			[
+				"tntplayer",
+				"www\\js\\tnt-player.js"
+			],
+			[
+				".js",
+				"server.js"
+			],
+			[
+				"gitignore",
+				".gitignore"
+			],
+			[
+				"dataservice",
+				"source\\scripts\\DataService.js"
+			],
+			[
+				"main.less",
+				"source\\styles\\main.less"
+			],
+			[
+				"autoinpu",
+				"source\\scripts\\AutoInput.jsx"
+			],
+			[
+				"readme",
+				"README.md"
+			],
+			[
+				"index.jsx",
+				"source\\Index.jsx"
+			],
+			[
+				"main.js",
+				"source\\main.js"
+			],
+			[
+				"index.html",
+				"devserver_files\\index.html"
+			],
+			[
+				"exmaple",
+				"source\\scripts\\example.js"
+			],
+			[
+				"example",
+				"source\\scripts\\example.js"
+			],
+			[
+				"password",
+				"node_modules\\faker\\vendor\\password-generator.js"
+			],
+			[
+				"fakedata",
+				"source\\scripts\\data\\fakeData.js"
+			],
+			[
+				".less",
+				"source\\styles\\main.less"
+			],
+			[
+				"example.js",
+				"source\\scripts\\example.js"
+			],
+			[
+				"main",
+				"source\\main.js"
+			],
+			[
+				"package",
+				"package.json"
+			],
+			[
+				"autocomplete",
+				"source\\scripts\\AutocompleteInput.jsx"
+			],
+			[
+				"index",
+				"devserver_files\\index.html"
+			],
+			[
+				"readme.",
+				"README.md"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 216.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

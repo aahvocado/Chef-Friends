@@ -18,13 +18,25 @@ public class GameController : MonoBehaviour {
 		_GameInstantiator = GameInstantiator.getInstance;
 		
 		// do stuff
-		instanciateDeck();
+		handleNewDecks();
 	}
 
-	public void instanciateDeck() {
-		for (var i = 0; i < defaultHandSize; i++) {
-			var newCardPos = new Vector3(-6f, 3 - (i * CardConstants.cardSize));
-			var newCard = _GameInstantiator.instantiateCard(newCardPos);
+	public void handleNewDecks() {
+		DeckController playerDeck1 = _PlayerController.getPlayerDeck1();
+		instanciateHandView(playerDeck1);
+
+		DeckController playerDeck2 = _PlayerController.getPlayerDeck2();
+	}
+
+	public void instanciateHandView(DeckController deckController) {
+		List<CardController> deckList = deckController.getDeck();
+
+		for (int i = 0; i < defaultHandSize; i++) {
+			CardController card = deckList[i];
+			Vector3 newCardPos = new Vector3(-6f, 3 - (i * CardConstants.cardSize));
+			GameObject newCard = _GameInstantiator.instantiateCard(newCardPos);
+			CardView cardView = newCard.transform.GetComponent(typeof(CardView)) as CardView;
+			cardView.setDisplayText(card.id);
 		}
 	}
 
