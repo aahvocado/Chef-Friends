@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CardController {
-	public string id;
+	private string id;
+	public string name;
 
 	public CardController() {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+
 	}
 
+	// setters
 	public void setId(string newId) {
 		id = newId;
+	}
+
+	// getters
+	public string getName() {
+		return name;
+	}
+	public string getId() {
+		return id;
 	}
 }

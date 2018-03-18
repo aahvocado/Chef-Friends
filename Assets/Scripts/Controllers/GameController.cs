@@ -36,7 +36,7 @@ public class GameController : MonoBehaviour {
 			Vector3 newCardPos = new Vector3(-6f, 3 - (i * CardConstants.cardSize));
 			GameObject newCard = _GameInstantiator.instantiateCard(newCardPos);
 			CardView cardView = newCard.transform.GetComponent(typeof(CardView)) as CardView;
-			cardView.setDisplayText(card.id);
+			cardView.setDisplayText(card.getName() + " " + card.getId());
 		}
 	}
 
