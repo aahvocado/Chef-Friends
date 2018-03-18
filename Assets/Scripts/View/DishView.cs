@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DishView : MonoBehaviour {
+public class DishView : BaseView {
 	public string defaultCardText;
 	public string defaultCompletionText;
 

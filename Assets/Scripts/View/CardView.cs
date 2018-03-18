@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardView : MonoBehaviour {	
+public class CardView : BaseView {	
 	public string defaultCardText;
 
 	private TextMesh cardTextMesh;
@@ -25,8 +25,10 @@ public class CardView : MonoBehaviour {
 		
 	}
 
-	void onMouseUp() {
-		// useCard();
+	void OnMouseUp() {
+		if (this.controller != null) {
+			controller.OnMouseUpView();
+		}
 	}
 
 	void OnMouseOver() {
@@ -39,6 +41,7 @@ public class CardView : MonoBehaviour {
 		emission.enabled = false;
 	}
 
+	// setters
 	public void setDisplayText(string newText) {
 		if (cardTextMesh != null) {
 			cardTextMesh.text = newText;

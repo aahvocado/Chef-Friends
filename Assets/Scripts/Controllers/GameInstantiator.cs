@@ -4,11 +4,9 @@ using UnityEngine;
 
 // #singleton
 public class GameInstantiator : MonoBehaviour {
-	GameObject CardComponentPrefab;
-
+	
 	// Use this for initialization
 	void Start () {
-    	// CardComponentPrefab = Instantiate(Resources.Load("Prefabs/CardComponent", typeof(GameObject))) as GameObject;
 	}
 
 	//

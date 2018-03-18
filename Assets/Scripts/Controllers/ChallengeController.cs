@@ -21,6 +21,12 @@ public class ChallengeController : MonoBehaviour {
 		updateDishCompletion();
 	}
 
+	public int applyCook(int power) {
+		challenge -= power;
+		updateDishCompletion();
+		return challenge;
+	}
+
 	public void updateDishCompletion() {
 		float completionPercent = Mathf.Round((1 - (float)challenge/(float)defaultChallenge) * 100f);
 		dishView.setCompletionText(completionPercent + "%");

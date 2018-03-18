@@ -2,16 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardController {
-	private string id;
+public class CardController : BaseController {
+    public GameController _GameController;
 	public string name;
+	public int power;
+
+	private string id;
 
 	public CardController() {
-
+		_GameController = GameController.getInstance;
 	}
 
-	public void useCard() {
-		// override me
+	// override me
+	public virtual void useCard() { }
+
+	// view handlers
+	public override void OnMouseUpView() {
+		useCard();
 	}
 
 	// setters

@@ -28,6 +28,9 @@ public class GameController : MonoBehaviour {
 		
 	}
 
+	public void useCook(int power) {
+		_ChallengeController.applyCook(power);
+	}
 	
 	// handles asking to make a View of the current Hand
 	public void instanciateNewDecks() {
@@ -46,6 +49,8 @@ public class GameController : MonoBehaviour {
 			Vector3 newCardPos = new Vector3(7f, 4 - (i * CardConstants.cardSize));
 			GameObject newCard = _GameInstantiator.instantiateCard(newCardPos);
 			CardView cardView = newCard.transform.GetComponent<CardView>();
+			cardView.setController(card);
+			card.setView(cardView);
 			cardView.setDisplayText(card.getName() + " " + card.getId());
 		}
 	}
