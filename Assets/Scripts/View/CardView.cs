@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardView : MonoBehaviour {
-	public string displayText;
-	
-	private string id;
-	private TextMesh cardText;
+public class CardView : MonoBehaviour {	
+	public string defaultCardText;
+
+	private TextMesh cardTextMesh;
 	private ParticleSystem SelectedParticleSystem;
 
 	// Use this for initialization
 	void Start () {
 		GameObject CardTextObject = this.transform.Find("CardText").gameObject;
-		cardText = CardTextObject.GetComponent(typeof(TextMesh)) as TextMesh;
-		cardText.text = displayText;
+		cardTextMesh = CardTextObject.GetComponent<TextMesh>();
+		setDisplayText(defaultCardText);
 
 		GameObject ParticleObject = this.transform.Find("CardSelectedParticles").gameObject;
 		SelectedParticleSystem = ParticleObject.GetComponent<ParticleSystem>();
@@ -24,6 +23,10 @@ public class CardView : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	void onMouseUp() {
+		// useCard();
 	}
 
 	void OnMouseOver() {
@@ -37,6 +40,10 @@ public class CardView : MonoBehaviour {
 	}
 
 	public void setDisplayText(string newText) {
-		displayText = newText;
+		if (cardTextMesh != null) {
+			cardTextMesh.text = newText;
+		} else {
+			defaultCardText = newText;
+		}
 	}
 }

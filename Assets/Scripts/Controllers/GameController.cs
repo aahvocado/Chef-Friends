@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour {
 		
 	}
 
+	
 	// handles asking to make a View of the current Hand
 	public void instanciateNewDecks() {
 		DeckController playerDeck1 = _PlayerController.getPlayerDeck1();
@@ -44,7 +45,7 @@ public class GameController : MonoBehaviour {
 			CardController card = deckList[i];
 			Vector3 newCardPos = new Vector3(7f, 4 - (i * CardConstants.cardSize));
 			GameObject newCard = _GameInstantiator.instantiateCard(newCardPos);
-			CardView cardView = newCard.transform.GetComponent(typeof(CardView)) as CardView;
+			CardView cardView = newCard.transform.GetComponent<CardView>();
 			cardView.setDisplayText(card.getName() + " " + card.getId());
 		}
 	}

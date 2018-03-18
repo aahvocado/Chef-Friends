@@ -10,6 +10,10 @@ public class CardController {
 
 	}
 
+	public void useCard() {
+		// override me
+	}
+
 	// setters
 	public void setId(string newId) {
 		id = newId;
