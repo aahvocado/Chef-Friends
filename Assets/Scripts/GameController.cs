@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// #singleton
 public class GameController : MonoBehaviour {
     // singletons
-    public GameInstantiator GameInstantiatorInstance;
+    public PlayerController _PlayerController;
+    public GameInstantiator _GameInstantiator;
 
     // component start here
     private int defaultHandSize = 3;
@@ -12,17 +14,17 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		// get singletons
-		GameInstantiatorInstance = GameInstantiator.getInstance;
+		_PlayerController = PlayerController.getInstance;
+		_GameInstantiator = GameInstantiator.getInstance;
 		
 		// do stuff
-		instanciateDefaultCards();
+		instanciateDeck();
 	}
 
-	void instanciateDefaultCards() {
+	public void instanciateDeck() {
 		for (var i = 0; i < defaultHandSize; i++) {
-			var newCardPos = new Vector3(-5.5f, 3 - (i * CardConstants.cardSize));
-			var newCard = GameInstantiatorInstance.createCard(newCardPos);
-			
+			var newCardPos = new Vector3(-6f, 3 - (i * CardConstants.cardSize));
+			var newCard = _GameInstantiator.instantiateCard(newCardPos);
 		}
 	}
 

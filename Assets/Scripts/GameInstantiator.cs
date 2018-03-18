@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// #singleton
 public class GameInstantiator : MonoBehaviour {
-	// component start here
 	GameObject CardComponentPrefab;
 
 	// Use this for initialization
@@ -12,9 +12,9 @@ public class GameInstantiator : MonoBehaviour {
 	}
 
 	//
-	public GameObject createCard (Vector3 newPos) {
-		var newCard = Instantiate(Resources.Load("Prefabs/CardComponent", typeof(GameObject))) as GameObject;
-		var cardTransform = newCard.transform;
+	public GameObject instantiateCard (Vector3 newPos) {
+		GameObject newCard = Instantiate(Resources.Load("Prefabs/CardComponent", typeof(GameObject))) as GameObject;
+		Transform cardTransform = newCard.transform;
 		cardTransform.position = newPos;
 		return newCard;
 	}
