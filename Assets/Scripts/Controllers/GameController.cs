@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
     // singletons
     public PlayerController _PlayerController;
+    public ChallengeController _ChallengeController;
     public GameInstantiator _GameInstantiator;
 
     // component start here
@@ -15,34 +16,37 @@ public class GameController : MonoBehaviour {
 	void Start () {
 		// get singletons
 		_PlayerController = PlayerController.getInstance;
+		_ChallengeController = ChallengeController.getInstance;
 		_GameInstantiator = GameInstantiator.getInstance;
 		
 		// do stuff
-		handleNewDecks();
-	}
-
-	public void handleNewDecks() {
-		DeckController playerDeck1 = _PlayerController.getPlayerDeck1();
-		instanciateHandView(playerDeck1);
-
-		DeckController playerDeck2 = _PlayerController.getPlayerDeck2();
-	}
-
-	public void instanciateHandView(DeckController deckController) {
-		List<CardController> deckList = deckController.getDeck();
-
-		for (int i = 0; i < defaultHandSize; i++) {
-			CardController card = deckList[i];
-			Vector3 newCardPos = new Vector3(-6f, 3 - (i * CardConstants.cardSize));
-			GameObject newCard = _GameInstantiator.instantiateCard(newCardPos);
-			CardView cardView = newCard.transform.GetComponent(typeof(CardView)) as CardView;
-			cardView.setDisplayText(card.getName() + " " + card.getId());
-		}
+		instanciateNewDecks();
 	}
 
 	// Update is called once per frame
 	void Update () {
 		
+	}
+
+	// handles asking to make a View of the current Hand
+	public void instanciateNewDecks() {
+		DeckController playerDeck1 = _PlayerController.getPlayerDeck1();
+		instanciateHandView(playerDeck1);
+
+		// DeckController playerDeck2 = _PlayerController.getPlayerDeck2();
+	}
+
+	// makes a view of the current Hand
+	public void instanciateHandView(DeckController deckController) {
+		List<CardController> deckList = deckController.getDeck();
+
+		for (int i = 0; i < defaultHandSize; i++) {
+			CardController card = deckList[i];
+			Vector3 newCardPos = new Vector3(7f, 4 - (i * CardConstants.cardSize));
+			GameObject newCard = _GameInstantiator.instantiateCard(newCardPos);
+			CardView cardView = newCard.transform.GetComponent(typeof(CardView)) as CardView;
+			cardView.setDisplayText(card.getName() + " " + card.getId());
+		}
 	}
 
 	// create singleton

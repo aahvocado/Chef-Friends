@@ -3,19 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class DeckController {
-	public List<string> defaultDeckList = new List<string> {"apple", "cook", "cook", "cook", "cook"};
+	public List<string> defaultDeckList = new List<string> { "apple", "cook", "cook", "cook", "cook" };
 
 	private List<CardController> deckList;
 
 	public DeckController () {
-    	createDefaultDeck();
-    	printList();
+    	createDeck(defaultDeckList);
     	shuffleDeck();
-    	printList();
-	}
-
-	public List<CardController> createDefaultDeck () {
-		return createDeck(defaultDeckList);
 	}
 
 	// Creates a Deck and creates the cards to populate the list

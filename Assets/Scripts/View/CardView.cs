@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CardView : MonoBehaviour {
 	public string displayText;
+	
+	private string id;
 	private TextMesh cardText;
 
 	// Use this for initialization
