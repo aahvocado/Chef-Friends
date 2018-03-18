@@ -6,18 +6,19 @@ using UnityEngine;
 	base Controller class for Cards
 */
 public class CardController : BaseController {
-    public GameController _GameController;
+    // public GameController _GameController;
+    public PlayerController owner;
 	public string name;
 	public int power;
+	public string type;
 
 	private string id;
 
 	public CardController() {
-		_GameController = GameController.getInstance;
+		// get singletons
+		// _GameController = GameController.getInstance;
 	}
 
-	// override me
-	public virtual void useCard() {}
 
 	// view handlers
 	public override void OnViewMouseUp() {
@@ -25,9 +26,15 @@ public class CardController : BaseController {
 	}
 
 	// setters
+	public void setOwner(PlayerController newOwner) {
+		owner = newOwner;
+	}
 	public void setId(string newId) {
 		id = newId;
 	}
+
+	// override me
+	public virtual void useCard() {}
 
 	// getters
 	public string getName() {
@@ -35,5 +42,11 @@ public class CardController : BaseController {
 	}
 	public string getId() {
 		return id;
+	}
+	public string getType() {
+		return type;
+	}
+	public int getPower() {
+		return power;
 	}
 }

@@ -12,7 +12,7 @@ public class DeckController {
 	private List<CardController> currentDeck; // currently in the deck
 	private List<CardController> discardDeck; // discard pile
 
-	private List<CardController> handList; // cards in neither currentDeck nor discardDeck
+	private List<CardController> unknownList; // cards in neither currentDeck nor discardDeck, probably in Hand
 
 	// constructor
 	public DeckController () {
@@ -28,10 +28,23 @@ public class DeckController {
 		} else {
 			// todo: implement a pop() method?
 			CardController card = currentDeck[0]; // get the top card
-			handList.Add(card);
+			unknownList.Add(card);
 			currentDeck.Remove(card); // remove it from current deck
 			return card;
 		}
+	}
+
+	// puts given card into discardDeck
+	public List<CardController> discardCard(CardController card) {
+		discardDeck.Add(card);
+
+		// remove it from our unknown list
+		CardController cardInUnknown = getCardInUnknownList(card);
+		if (cardInUnknown != null) {
+			unknownList.Remove(cardInUnknown);
+		}
+
+		return discardDeck;
 	}
 
 	// Creates a Deck and creates the cards to populate the list
@@ -89,13 +102,13 @@ public class DeckController {
 
 	// sets the current deck to the original deck then shuffles it, clears the discard list
 	public List<CardController> handleResetDeck () {
-		handList = new List<CardController>(); // clear this mystery list
+		unknownList = new List<CardController>(); // clear this mystery list
 		discardDeck = new List<CardController>(); // clear discard list
     	currentDeck = completeDeck.GetRange(0, completeDeck.Count); // make a shallow copy of the original deck
     	return shuffleCurrentDeck();
 	}
 
-	// helpers
+	// - helpers
 	public string printList(List<CardController> list) {
 		string print = "";
 		foreach (CardController card in list) {
@@ -103,6 +116,11 @@ public class DeckController {
 		}
 		Debug.Log(print);
 		return print;
+	}
+
+	// 
+	public CardController getCardInUnknownList(CardController card) {
+		return unknownList.Find(item => item.getId() == card.getId());
 	}
 	public List<CardController> getCompleteDeck() {
 		return completeDeck;

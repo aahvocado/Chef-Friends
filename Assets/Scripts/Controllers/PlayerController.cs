@@ -7,28 +7,46 @@ using UnityEngine;
 	 manages their hands and their decks
 */
 public class PlayerController : BaseController {
+    public GameController _GameController;
+
     public int defaultHandSize = 3;
 
     private int currentHandSize;
-	public DeckController playerDeckController;
+	public DeckController deckController;
 	public List<CardController> currentHandList; // list of controllers for the cards in the hand
 	public List<CardView> handViewList; // list of the views of the current hand
 
 	public PlayerController () {
+		// get singletons
+		_GameController = GameController.getInstance;
+
+		// 
 		currentHandSize = defaultHandSize;
-		playerDeckController = new DeckController();
+		deckController = new DeckController();
 		currentHandList = new List<CardController>();
 		handViewList = new List<CardView>();
 
 		instanciateHandView();
 	}
 
+	public void usePlayerCard(CardController card) {
+		switch(card.getType()) {
+			case "cook":
+				_GameController.useCook(card.getPower());
+				deckController.discardCard(card);
+				deckController.drawCard();
+				break;
+			default:
+				break;
+		}
+	}
+
 	// makes a view of the current Hand
 	public void instanciateHandView() {
-		List<CardController> tempDeckList = playerDeckController.getCurrentDeck();
+		List<CardController> tempDeckList = deckController.getCurrentDeck();
 
 		for (int i = 0; i < currentHandSize; i++) {
-			CardController card = playerDeckController.drawCard();
+			CardController card = deckController.drawCard();
 
 			// instantiate GameObject
 			Vector3 newCardPos = new Vector3(7f, 4 - (i * CardConstants.cardSize));
@@ -41,6 +59,7 @@ public class PlayerController : BaseController {
 			// let the Controller and View know of each other
 			cardView.setController(card);
 			card.setView(cardView);
+			card.setOwner(this);
 			
 			// add View and Controller to our list
 			currentHandList.Add(card);
@@ -50,6 +69,6 @@ public class PlayerController : BaseController {
 
 	// gets this player's DeckController
 	public DeckController getDeck() {
-		return playerDeckController;
+		return deckController;
 	}
 }

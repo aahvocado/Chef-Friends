@@ -6,9 +6,12 @@ public class CookCard : CardController {
 	public CookCard() {
 		name = "Cook";
 		power = 1;
+		type = "cook";
 	}
 
 	public override void useCard() {
-		_GameController.useCook(power);
+		if (owner != null) {
+			owner.usePlayerCard(this);
+		}
 	}
 }
