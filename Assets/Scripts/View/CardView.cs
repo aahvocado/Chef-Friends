@@ -27,7 +27,7 @@ public class CardView : BaseView {
 
 	void OnMouseUp() {
 		if (this.controller != null) {
-			controller.OnMouseUpView();
+			controller.OnViewMouseUp();
 		}
 	}
 

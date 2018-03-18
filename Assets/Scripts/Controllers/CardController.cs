@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+	base Controller class for Cards
+*/
 public class CardController : BaseController {
     public GameController _GameController;
 	public string name;
@@ -14,10 +17,10 @@ public class CardController : BaseController {
 	}
 
 	// override me
-	public virtual void useCard() { }
+	public virtual void useCard() {}
 
 	// view handlers
-	public override void OnMouseUpView() {
+	public override void OnViewMouseUp() {
 		useCard();
 	}
 

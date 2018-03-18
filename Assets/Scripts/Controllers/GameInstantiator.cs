@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// #singleton
-public class GameInstantiator : MonoBehaviour {
+/*
+	Helps instantiate GameObjects
 	
+	#singleton
+*/
+public class GameInstantiator : MonoBehaviour {
+
 	// Use this for initialization
 	void Start () {
 	}
