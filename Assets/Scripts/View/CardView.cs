@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class CardView : BaseView {
 	// view
-	private string animationName;
+	private string animationState; // name of the animation being used
+	private bool destroyOnUse; // destroy this card GameObject after being used?
+	
 	private float animationTimeDefault = 22;
 	private float animationTime;
 	private Vector3 animStartPos;
@@ -12,6 +14,7 @@ public class CardView : BaseView {
 
 	// data
 	public string defaultCardText;
+	public Vector3 handRelativePosition; // this card's position in the hand
 
 	private TextMesh cardTextMesh;
 	private ParticleSystem SelectedParticleSystem;
@@ -26,30 +29,56 @@ public class CardView : BaseView {
 		SelectedParticleSystem = ParticleObject.GetComponent<ParticleSystem>();
 		var emission = SelectedParticleSystem.emission;
 		emission.enabled = false;
+
+		// prepare for animation
+		transform.localScale = Vector3.zero;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (animationTime > 0) {
-			Vector3 curPos = this.transform.position;
-			float animPercent = 1.0f - (animationTime / animationTimeDefault);
-			Vector3 pointB = new Vector3(animStartPos.x + 1, animStartPos.y + 1.5f, animStartPos.z);
-			this.transform.position = CurveHelper.getQuadraticBezier(animStartPos, pointB, animEndPos, animPercent);
-			animationTime --;
 
-			if (animationTime == 0 && true) {
+		if (animationTime > 0) {
+			float animPercent = 1.0f - (animationTime / animationTimeDefault);
+
+			// animate drawing a card
+			if (animationState == "drawing") {
+				transform.localScale = Vector3.one * animPercent;
+				Vector3 pointB = animEndPos - animStartPos;
+				transform.position = CurveHelper.getQuadraticBezier(animStartPos, pointB, animEndPos, animPercent);
+			}
+			// animate the card being used
+			if (animationState == "consuming") {
+				Vector3 pointB = new Vector3(animStartPos.x + 1, animStartPos.y + 1.5f, animStartPos.z);
+				transform.position = CurveHelper.getQuadraticBezier(animStartPos, pointB, animEndPos, animPercent);
+			}
+
+			// done animating a frame
+			animationTime --;
+			if (animationTime == 0 && destroyOnUse) {
 				handleViewDestroy();
 			}
 		}
 	}
 
 	// - called from Controller
+	// when the card was drawn
+	public void animateDrawCard(Vector3 start) {
+		animationState = "drawing";
+		animationTimeDefault = 8;
+		animStartPos = start;
+		animEndPos = CardConstants.handCenterPosition;
+		animationTime = animationTimeDefault;
+		destroyOnUse = false;
+	}
 	// when the card was used
 	public void animateUseCard() {
+		animationState = "consuming";
 		Vector3 curPos = this.transform.position;
 		animStartPos = curPos;
 		animEndPos = new Vector3(curPos.x + 3, curPos.y - 3, curPos.z);
+		animationTimeDefault = 22;
 		animationTime = animationTimeDefault;
+		destroyOnUse = true;
 	}
 
 	// - setters
@@ -72,7 +101,7 @@ public class CardView : BaseView {
 
 	// MonoBehavior
 	void OnMouseUp() {
-		if (controller != null) {
+		if (controller != null && isInteractable()) {
 			controller.OnViewMouseUp();
 		}
 	}

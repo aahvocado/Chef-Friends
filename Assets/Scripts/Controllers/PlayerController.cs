@@ -51,9 +51,10 @@ public class PlayerController : BaseController {
 		instanciateNewCard(newCard);
 	}
 
+	// create a new card and add it to our Hand
 	public void instanciateNewCard(CardController card) {
 		// instantiate GameObject
-		Vector3 newCardPos = new Vector3(7f, 4 - (handViewList.Count * CardConstants.cardSize));
+		Vector3 newCardPos = Vector3.zero; // to change
 		GameObject newCard = _GameInstantiator.instantiateCard(newCardPos);
 
 		// get the view and set relevent data
@@ -68,6 +69,10 @@ public class PlayerController : BaseController {
 		// add View and Controller to our list
 		currentHandList.Add(card);
 		handViewList.Add(cardView);
+
+		// animations?
+		cardView.animateDrawCard(Vector3.zero);
+		handleCardViewPositions();
 	}
 
 	// makes a view of the current Hand
@@ -81,6 +86,11 @@ public class PlayerController : BaseController {
 		}
 
 		return handViewList;
+	}
+
+	// move each card in hand relative to number of cards
+	public void handleCardViewPositions() {
+
 	}
 
 	// gets this player's DeckController

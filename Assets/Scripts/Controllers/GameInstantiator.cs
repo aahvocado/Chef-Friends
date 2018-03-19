@@ -14,18 +14,18 @@ public class GameInstantiator : MonoBehaviour {
 	}
 
 	//
-	public GameObject instantiateDish (Vector3 newPos) {
+	public GameObject instantiateDish (Vector3 defaultPos) {
 		GameObject newDish = Instantiate(Resources.Load("Prefabs/DishComponent", typeof(GameObject))) as GameObject;
 		Transform cardTransform = newDish.transform;
-		cardTransform.position = newPos;
+		cardTransform.position = defaultPos;
 		return newDish;
 	}
 
 	//
-	public GameObject instantiateCard (Vector3 newPos) {
+	public GameObject instantiateCard (Vector3 defaultPos) {
 		GameObject newCard = Instantiate(Resources.Load("Prefabs/CardComponent", typeof(GameObject))) as GameObject;
 		Transform cardTransform = newCard.transform;
-		cardTransform.position = newPos;
+		cardTransform.position = defaultPos;
 		return newCard;
 	}
 
