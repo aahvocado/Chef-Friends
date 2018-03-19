@@ -36,6 +36,10 @@ public class CardView : BaseView {
 			Vector3 pointB = new Vector3(animStartPos.x + 1, animStartPos.y + 1.5f, animStartPos.z);
 			this.transform.position = CurveHelper.getQuadraticBezier(animStartPos, pointB, animEndPos, animPercent);
 			animationTime --;
+
+			if (animationTime == 0 && true) {
+				handleViewDestroy();
+			}
 		}
 	}
 
@@ -58,6 +62,13 @@ public class CardView : BaseView {
 	}
 
 	// - getters
+	public override bool isInteractable() {
+		if (animationTime == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	// MonoBehavior
 	void OnMouseUp() {

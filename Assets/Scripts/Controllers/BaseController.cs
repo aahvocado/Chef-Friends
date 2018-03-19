@@ -15,17 +15,18 @@ public class BaseController {
 		_GameInstantiator = GameInstantiator.getInstance;
     }
 
-    // called from view
-    public virtual void OnViewMouseUp() { }
+    // view was removed
+	public virtual void OnRemoveView(BaseView destroyedView) {}
+
+    // - called from view
+    public virtual void OnViewMouseUp() {}
 
     // manages view
 	public void setView(BaseView newView) {
 		view = newView;
 	}
-	public void OnViewDestroy() {
-		removeView();
-	}
-	public void removeView() {
+	public void OnViewWillDestroy(BaseView destroyedView) {
+		OnRemoveView(destroyedView);
 		view = null;
 	}
 }

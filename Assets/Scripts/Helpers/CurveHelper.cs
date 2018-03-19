@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
-	https://answers.unity.com/questions/12689/moving-an-object-along-a-bezier-curve.html
-*/
 public class CurveHelper {
+	/*
+		https://answers.unity.com/questions/12689/moving-an-object-along-a-bezier-curve.html
+	*/
 	// bezier with 1 control point
 	public static Vector3 getQuadraticBezier(Vector3 start, Vector3 control, Vector3 end, float percent) {
 		float t = percent;

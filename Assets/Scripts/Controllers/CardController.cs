@@ -13,17 +13,23 @@ public class CardController : BaseController {
 	public string type;
 
 	private string id;
+	private bool notifyOnRemoveView;
 
 	public CardController() {
 		// get singletons
 		// _GameController = GameController.getInstance;
 	}
 
-
 	// - called from view
 	// when the view was clicked
 	public override void OnViewMouseUp() {
 		useCard();
+	}
+	public override void OnRemoveView(BaseView destroyedView) {
+		Debug.Log("OnRemoveView");
+		if (notifyOnRemoveView) {
+			owner.handleCardConsumed(this, (CardView)destroyedView);
+		}
 	}
 
 	// - called from owner
@@ -31,6 +37,7 @@ public class CardController : BaseController {
 	public void animateUseCard() {
 		CardView tempView = (CardView)view;
 		tempView.animateUseCard();
+		notifyOnRemoveView = true;
 	}
 
 	// setters

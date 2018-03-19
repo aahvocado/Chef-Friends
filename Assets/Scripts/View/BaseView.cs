@@ -8,14 +8,17 @@ using UnityEngine;
 public class BaseView : MonoBehaviour {	
 	public BaseController controller;
 
-	// called from controller
+	public virtual bool isInteractable() {
+		return true;
+	}
+
+	// - called from controller
 	public void setController(BaseController newController) {
 		this.controller = newController;
 	}
-
-	// tell controller we are destroyed
-	private void OnDestroy() {
-		if (controller != null)
-			controller.OnViewDestroy();
+	// - setters
+	public void handleViewDestroy() {
+		controller.OnViewWillDestroy(this);
+		Destroy(gameObject);
 	}
 }
