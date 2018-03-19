@@ -29,12 +29,14 @@ public class PlayerController : BaseController {
 		instanciateHandView();
 	}
 
+	// a card was used
 	public void usePlayerCard(CardController card) {
 		switch(card.getType()) {
 			case "cook":
 				_GameController.useCook(card.getPower());
 				deckController.discardCard(card);
 				deckController.drawCard();
+				card.animateUseCard();
 				break;
 			default:
 				break;
@@ -43,7 +45,7 @@ public class PlayerController : BaseController {
 
 	// makes a view of the current Hand
 	public void instanciateHandView() {
-		List<CardController> tempDeckList = deckController.getCurrentDeck();
+		// List<CardController> tempDeckList = deckController.getCurrentDeck();
 
 		for (int i = 0; i < currentHandSize; i++) {
 			CardController card = deckController.drawCard();

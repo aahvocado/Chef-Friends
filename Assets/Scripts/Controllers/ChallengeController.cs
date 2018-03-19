@@ -34,7 +34,7 @@ public class ChallengeController : MonoBehaviour {
 
 	// handles asking to make a View of the current Hand
 	public void instanciateChallenge() {
-		Vector3 newDishPos = new Vector3(0, 1);
+		Vector3 newDishPos = new Vector3(0, -1);
 		currentDish = _GameInstantiator.instantiateDish(newDishPos);
 		dishView = currentDish.transform.GetComponent<DishView>();
 		dishView.setDisplayText("Dish");

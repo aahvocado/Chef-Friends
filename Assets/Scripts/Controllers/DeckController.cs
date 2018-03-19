@@ -8,6 +8,7 @@ using UnityEngine;
 public class DeckController {
 	public List<string> defaultDeckList = new List<string> { "apple", "cook", "cook", "cook", "cook" };
 
+	// data
 	private List<CardController> completeDeck; // original complete deck
 	private List<CardController> currentDeck; // currently in the deck
 	private List<CardController> discardDeck; // discard pile

@@ -20,9 +20,17 @@ public class CardController : BaseController {
 	}
 
 
-	// view handlers
+	// - called from view
+	// when the view was clicked
 	public override void OnViewMouseUp() {
 		useCard();
+	}
+
+	// - called from owner
+	// when the card was used
+	public void animateUseCard() {
+		CardView tempView = (CardView)view;
+		tempView.animateUseCard();
 	}
 
 	// setters
