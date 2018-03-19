@@ -21,11 +21,11 @@ public class CardView : BaseView {
 
 	// Use this for initialization
 	void Start () {
-		GameObject CardTextObject = this.transform.Find("CardText").gameObject;
+		GameObject CardTextObject = transform.Find("CardText").gameObject;
 		cardTextMesh = CardTextObject.GetComponent<TextMesh>();
 		setDisplayText(defaultCardText);
 
-		GameObject ParticleObject = this.transform.Find("CardSelectedParticles").gameObject;
+		GameObject ParticleObject = transform.Find("CardSelectedParticles").gameObject;
 		SelectedParticleSystem = ParticleObject.GetComponent<ParticleSystem>();
 		var emission = SelectedParticleSystem.emission;
 		emission.enabled = false;
@@ -51,34 +51,58 @@ public class CardView : BaseView {
 				Vector3 pointB = new Vector3(animStartPos.x + 1, animStartPos.y + 1.5f, animStartPos.z);
 				transform.position = CurveHelper.getQuadraticBezier(animStartPos, pointB, animEndPos, animPercent);
 			}
+			// basic movement
+			if (animationState == "moving") {
+				transform.position = Vector3.MoveTowards(transform.position, animEndPos, Time.deltaTime * 10);
+			}
 
 			// done animating a frame
 			animationTime --;
-			if (animationTime == 0 && destroyOnUse) {
-				handleViewDestroy();
+
+			if (animationTime == 0) {
+				animationState = null;
+
+				if (destroyOnUse) {
+					handleViewDestroy();
+				}
 			}
 		}
 	}
 
-	// - called from Controller
+	// - animations - called from Controller
 	// when the card was drawn
 	public void animateDrawCard(Vector3 start) {
-		animationState = "drawing";
-		animationTimeDefault = 8;
-		animStartPos = start;
-		animEndPos = CardConstants.handCenterPosition;
-		animationTime = animationTimeDefault;
-		destroyOnUse = false;
+		if (canAnimate()) {
+			animationState = "drawing";
+			animationTimeDefault = 10;
+			animStartPos = start;
+			animEndPos = CardConstants.handCenterPosition;
+			animationTime = animationTimeDefault;
+			destroyOnUse = false;
+		}
 	}
 	// when the card was used
 	public void animateUseCard() {
-		animationState = "consuming";
-		Vector3 curPos = this.transform.position;
-		animStartPos = curPos;
-		animEndPos = new Vector3(curPos.x + 3, curPos.y - 3, curPos.z);
-		animationTimeDefault = 22;
-		animationTime = animationTimeDefault;
-		destroyOnUse = true;
+		if (canAnimate()) {
+			animationState = "consuming";
+			Vector3 curPos = transform.position;
+			animStartPos = curPos;
+			animEndPos = new Vector3(curPos.x + 3, curPos.y - 3, curPos.z);
+			animationTimeDefault = 22;
+			animationTime = animationTimeDefault;
+			destroyOnUse = true;
+		}
+	}
+	// causes moveTowards
+	public void moveToPosition(Vector3 newPos) {
+		animStartPos = transform.position;
+		animEndPos = newPos;
+
+		if (canAnimate()) {
+			animationState = "moving";
+			animationTimeDefault = 40;
+			animationTime = animationTimeDefault;
+		}
 	}
 
 	// - setters
@@ -93,6 +117,13 @@ public class CardView : BaseView {
 	// - getters
 	public override bool isInteractable() {
 		if (animationTime == 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public override bool canAnimate() {
+		if (animationTime == 0 && animationState == null) {
 			return true;
 		} else {
 			return false;

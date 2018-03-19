@@ -90,7 +90,14 @@ public class PlayerController : BaseController {
 
 	// move each card in hand relative to number of cards
 	public void handleCardViewPositions() {
+		List<CardView> tempList = handViewList;
+		Vector3 newPos = CardConstants.handCenterPosition;
+		float margins = (CardConstants.handBoundsVertical * 2f) / (tempList.Count + 1f) - CardConstants.handBoundsVertical;
 
+		for(int i = 0; i < tempList.Count; i++) {
+			CardView view = tempList[i];
+			view.moveToPosition(new Vector3(newPos.x, CardConstants.handBoundsVertical + margins * i, newPos.z));
+		};
 	}
 
 	// gets this player's DeckController

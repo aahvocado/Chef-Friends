@@ -8,9 +8,8 @@ using UnityEngine;
 public class BaseView : MonoBehaviour {	
 	public BaseController controller;
 
-	public virtual bool isInteractable() {
-		return true;
-	}
+	public virtual bool isInteractable() { return true; }
+	public virtual bool canAnimate() { return true; }
 
 	// - called from controller
 	public void setController(BaseController newController) {

@@ -26,7 +26,6 @@ public class CardController : BaseController {
 		useCard();
 	}
 	public override void OnRemoveView(BaseView destroyedView) {
-		Debug.Log("OnRemoveView");
 		if (notifyOnRemoveView) {
 			owner.handleCardConsumed(this, (CardView)destroyedView);
 		}
