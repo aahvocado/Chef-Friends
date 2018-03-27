@@ -29,6 +29,14 @@ public class GameInstantiator : MonoBehaviour {
 		return newCard;
 	}
 
+	//
+	public GameObject instantiateIngredient (Vector3 defaultPos) {
+		GameObject newCard = Instantiate(Resources.Load("Prefabs/IngredientComponent", typeof(GameObject))) as GameObject;
+		Transform cardTransform = newCard.transform;
+		cardTransform.position = defaultPos;
+		return newCard;
+	}
+
 	// create singleton
 	private static GameInstantiator _instance;
     public static GameInstantiator getInstance { get { return _instance; } }

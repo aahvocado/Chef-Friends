@@ -6,7 +6,7 @@ using UnityEngine;
 	Class that handles Deck
 */
 public class DeckController {
-	public List<string> defaultDeckList = new List<string> { "apple", "cook", "cook", "cook", "cook" };
+	public List<string> defaultDeckList = new List<string> { "ingredient", "ingredient", "cook", "cook", "cook" };
 
 	// data
 	private List<CardController> completeDeck; // original complete deck

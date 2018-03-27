@@ -11,6 +11,9 @@ public class BaseView : MonoBehaviour {
 	public virtual bool isInteractable() { return true; }
 	public virtual bool canAnimate() { return true; }
 
+	// - update from model
+	public virtual void update() {}
+
 	// - called from controller
 	public void setController(BaseController newController) {
 		this.controller = newController;

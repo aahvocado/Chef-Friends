@@ -74,7 +74,7 @@ public class CardView : BaseView {
 	public void animateDrawCard(Vector3 start) {
 		if (canAnimate()) {
 			animationState = "drawing";
-			animationTimeDefault = 10;
+			animationTimeDefault = 13;
 			animStartPos = start;
 			animEndPos = CardConstants.handCenterPosition;
 			animationTime = animationTimeDefault;
@@ -100,7 +100,7 @@ public class CardView : BaseView {
 
 		if (canAnimate()) {
 			animationState = "moving";
-			animationTimeDefault = 40;
+			animationTimeDefault = 55;
 			animationTime = animationTimeDefault;
 		}
 	}
