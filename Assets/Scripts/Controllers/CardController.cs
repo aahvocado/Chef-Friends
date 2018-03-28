@@ -3,64 +3,35 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
-	base Controller class for Cards
+    base Controller class for Cards
 */
 public class CardController : BaseController {
-    // public GameController _GameController;
-    public PlayerController owner;
-	public string name;
-	public int power;
-	public string type;
+    public CardElement Element;
 
-	private string id;
-	private bool notifyOnRemoveView;
+    public CardController() {
 
-	public CardController() {
-		// get singletons
-		// _GameController = GameController.getInstance;
-	}
+    }
 
-	// - called from view
-	// when the view was clicked
-	public override void OnViewMouseUp() {
-		useCard();
-	}
-	public override void OnRemoveView(BaseView destroyedView) {
-		if (notifyOnRemoveView) {
-			owner.handleCardConsumed(this, (CardView)destroyedView);
-		}
-	}
+    // when the card view was clicked
+    public virtual void handleOnMouseUp() {
+        this.useCard();
+    }
 
-	// - called from owner
-	// when the card was used
-	public void animateUseCard() {
-		CardView tempView = (CardView)view;
-		tempView.animateUseCard();
-		notifyOnRemoveView = true;
-	}
+    public virtual void handleOnDoneAnimation() {
 
-	// setters
-	public void setOwner(PlayerController newOwner) {
-		owner = newOwner;
-	}
-	public void setId(string newId) {
-		id = newId;
-	}
+    }
 
-	// override me
-	public virtual void useCard() {}
+    // -- helpers
 
-	// getters
-	public string getName() {
-		return name;
-	}
-	public string getId() {
-		return id;
-	}
-	public string getType() {
-		return type;
-	}
-	public int getPower() {
-		return power;
-	}
+
+    // -- override by derived
+    public virtual void useCard() {}
+
+    // -- view
+    public void updateView(string animName) {
+        Element.View.handleUpdate(animName);
+    }
+    public void handleViewBeforeDestroy() {
+        Element.View = null;
+    }
 }

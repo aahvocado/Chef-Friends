@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4756931207658934}
   - component: {fileID: 114077502383276552}
   m_Layer: 0
-  m_Name: PrepComponent
+  m_Name: IngredientComponent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

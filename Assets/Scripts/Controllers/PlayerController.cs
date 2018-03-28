@@ -3,105 +3,66 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
-	Player
-	 manages their hands and their decks
+    Player
+    TODO MAYBE THIS IS NOT A CONTROLLER
+     manages their hands and their decks
 */
-public class PlayerController : BaseController {
+public class PlayerController {
     public GameController _GameController;
+    public GameInstantiator _GameInstantiator;
 
-    public int defaultHandSize = 3;
-
+    public int defaultHandSize = 1;
     private int currentHandSize;
-	public DeckController deckController;
-	public List<CardController> currentHandList; // list of controllers for the cards in the hand
-	public List<CardView> handViewList; // list of the views of the current hand
 
-	public PlayerController () {
-		// get singletons
-		_GameController = GameController.getInstance;
+    public DeckController deckController;
+    public List<CardElement> currentHandList; // TODO HandModel
 
-		// 
-		currentHandSize = defaultHandSize;
-		deckController = new DeckController();
-		currentHandList = new List<CardController>();
-		handViewList = new List<CardView>();
+    public PlayerController() {
+        // get singletons
+        _GameController = GameController.getInstance;
+        _GameInstantiator = GameInstantiator.getInstance;
 
-		instanciateHandView();
-	}
+        // set stuff
+        currentHandSize = defaultHandSize;
+        currentHandList = new List<CardElement>();
+        deckController = new DeckController();
 
-	// - called from CardController
-	// a card was used
-	public void usePlayerCard(CardController card) {
-		switch(card.getType()) {
-			case "cook":
-				_GameController.useCook(card.getPower());
-				break;
-			default:
-				break;
-		}
-		// todo check if valid use?
-		card.animateUseCard();
-	}
-	// a CardView was destroyed (probably from use)
-	public void handleCardConsumed(CardController card, CardView destroyedView) {
-		handViewList.Remove(destroyedView);
-		currentHandList.Remove(card);
-		deckController.discardCard(card);
-		CardController newCard = deckController.drawCard();
-		instanciateNewCard(newCard);
-	}
+        this.instanciateHandView();
+    }
 
-	// create a new card and add it to our Hand
-	public void instanciateNewCard(CardController card) {
-		// instantiate GameObject
-		Vector3 newCardPos = Vector3.zero; // to change
-		GameObject newCard = _GameInstantiator.instantiateCard(newCardPos);
+    /* creates a new Card (View and Controller) and adds it to our Hand, Model should already exist by now */
+    public CardElement createNewCard(CardElement newElement) {
+        currentHandList.Add(newElement);
 
-		// get the view and set relevent data
-		CardView cardView = newCard.transform.GetComponent<CardView>();
-		cardView.setDisplayText(card.getName() + " " + card.getId());
+        // instantiate GameObject
+        Vector3 newCardPos = Vector3.zero;
+        GameObject newCardObject = _GameInstantiator.instantiateCard(newCardPos);
+        newElement.Model.Position = CardConstants.handCenterPosition;
 
-		// let the Controller and View know of each other
-		card.setView(cardView);
-		card.setOwner(this);
-		cardView.setController(card);
+        // get the View from GameObject and set relevent data
+        CardView newView = newCardObject.transform.GetComponent<CardView>();        
+        newView.setDisplayText(newElement.Model.name + " " + newElement.Model.Id);
 
-		// add View and Controller to our list
-		currentHandList.Add(card);
-		handViewList.Add(cardView);
+        // assign MVC and finish
+        CardController newController = new CardController();
+        CardModel newModel = newElement.Model;
+        newElement.createMVC(newModel, newView, newController);
 
-		// animations?
-		cardView.animateDrawCard(Vector3.zero);
-		handleCardViewPositions();
-	}
+        // animations
+        newElement.View.handleUpdate(CardConstants.DRAW_CARD_ANIM);
 
-	// makes a view of the current Hand
-	public List<CardView> instanciateHandView() {
-		currentHandList = new List<CardController>();
-		handViewList = new List<CardView>();
+        return newElement;
+    }
 
-		for (int i = 0; i < currentHandSize; i++) {
-			CardController card = deckController.drawCard();
-			instanciateNewCard(card);
-		}
+    /* makes a new list of cards in the current Hand */
+    public List<CardElement> instanciateHandView() {
+        currentHandList = new List<CardElement>();
 
-		return handViewList;
-	}
+        for (int i = 0; i < currentHandSize; i++) {
+            CardElement card = deckController.drawCard();
+            this.createNewCard(card);
+        }
 
-	// move each card in hand relative to number of cards
-	public void handleCardViewPositions() {
-		List<CardView> tempList = handViewList;
-		Vector3 newPos = CardConstants.handCenterPosition;
-		float margins = (CardConstants.handBoundsVertical * 2f) / (tempList.Count + 1f) - CardConstants.handBoundsVertical;
-
-		for(int i = 0; i < tempList.Count; i++) {
-			CardView view = tempList[i];
-			view.moveToPosition(new Vector3(newPos.x, CardConstants.handBoundsVertical + margins * i, newPos.z));
-		};
-	}
-
-	// gets this player's DeckController
-	public DeckController getDeck() {
-		return deckController;
-	}
+        return currentHandList;
+    }
 }

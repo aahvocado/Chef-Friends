@@ -3,133 +3,119 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
-	Class that handles Deck
+    Class that handles Deck
 */
 public class DeckController {
-	public List<string> defaultDeckList = new List<string> { "ingredient", "ingredient", "cook", "cook", "cook" };
+    // data
+    private List<CardElement> completeDeck; // original complete deck
+    private List<CardElement> currentDeck; // currently in the deck
+    private List<CardElement> discardDeck; // discard pile
+    private List<CardElement> unknownList; // cards in neither currentDeck nor discardDeck, probably in Hand
 
-	// data
-	private List<CardController> completeDeck; // original complete deck
-	private List<CardController> currentDeck; // currently in the deck
-	private List<CardController> discardDeck; // discard pile
+    public DeckController () {
+        completeDeck = this.createDeck(CardConstants.defaultDeckList); // make a new deck and set default to it
+        this.handleResetDeck(); // sets up currentDeck and discardDeck
+    }
 
-	private List<CardController> unknownList; // cards in neither currentDeck nor discardDeck, probably in Hand
+    /* draws the next card in the currentDeck */
+    public CardElement drawCard() {
+        if (currentDeck.Count <= 0) {
+            this.handleShuffleDiscardToDeck();
+            return this.drawCard();
+        } else {
+            // todo: implement a pop() method?
+            CardElement card = currentDeck[0]; // get the top card
+            unknownList.Add(card);
+            currentDeck.Remove(card); // remove it from current deck
+            return card;
+        }
+    }
 
-	// constructor
-	public DeckController () {
-    	completeDeck = createDeck(defaultDeckList); // make a new deck and set default to it
-    	handleResetDeck(); // sets up currentDeck and discardDeck
-	}
+    /* puts given card into discardDeck */
+    public List<CardElement> discardCard(CardElement card) {
+        discardDeck.Add(card);
 
-	// draws the next card in the currentDeck
-	public CardController drawCard() {
-		if (currentDeck.Count <= 0) {
-			handleShuffleDiscardToDeck();
-			return drawCard();
-		} else {
-			// todo: implement a pop() method?
-			CardController card = currentDeck[0]; // get the top card
-			unknownList.Add(card);
-			currentDeck.Remove(card); // remove it from current deck
-			return card;
-		}
-	}
+        // remove it from our unknown list
+        CardElement cardInUnknown = getCardInUnknownList(card);
+        if (cardInUnknown != null) {
+            unknownList.Remove(cardInUnknown);
+        }
 
-	// puts given card into discardDeck
-	public List<CardController> discardCard(CardController card) {
-		discardDeck.Add(card);
+        return discardDeck;
+    }
 
-		// remove it from our unknown list
-		CardController cardInUnknown = getCardInUnknownList(card);
-		if (cardInUnknown != null) {
-			unknownList.Remove(cardInUnknown);
-		}
+    /* creates the initial list of Card Elements for a new deck */
+    public List<CardElement> createDeck(List<string> cardList) {
+        List<CardElement> tempDeck = new List<CardElement>();
+        for (int i = 0; i < cardList.Count; i++) {
+            string newId = i + "";
+            string newCardType = cardList[i];
+            CardElement newCard = new CardElement(this.createCardModel(newCardType, newId));
+            tempDeck.Add(newCard);
+        };
+        return tempDeck;
+    }
 
-		return discardDeck;
-	}
+    /* reorders everything inside current deck */
+    public List<CardElement> shuffleCurrentDeck() {
+        List<CardElement> tempDeck = currentDeck;
+        int n = tempDeck.Count;
+        for (int i = 0; i < tempDeck.Count; i++) {
+            int k = Random.Range(i, tempDeck.Count - 1);
+            CardElement tempCard = tempDeck[k];
+            tempDeck[k] = tempDeck[i];
+            tempDeck[i] = tempCard;
+        }
+        return tempDeck;
+    }
 
-	// Creates a Deck and creates the cards to populate the list
-	public List<CardController> createDeck(List<string> cardList) {
-		List<CardController> tempDeck = new List<CardController>();
-		for (int i = 0; i < cardList.Count; i++) {
-			string newId = i + "";
-			string newCardType = cardList[i];
-			CardController newCard = createCard(newCardType, newId);
-			tempDeck.Add(newCard);
-		};
-		return tempDeck;
-	}
+    /* shuffles discardDeck into currentDeck */
+    public List<CardElement> handleShuffleDiscardToDeck() {
+        List<CardElement> tempCurrentDeck = currentDeck;
+        List<CardElement> tempDiscardDeck = discardDeck;
+        foreach(CardElement card in tempDiscardDeck) {
+            tempCurrentDeck.Add(card);
+        };
+        discardDeck = new List<CardElement>(); // clear discard list
+        currentDeck = tempCurrentDeck;
+        return this.shuffleCurrentDeck();
+    }
 
-	// shuffles everything inside the current deck
-	public List<CardController> shuffleCurrentDeck() {
-		List<CardController> tempDeck = currentDeck;
-		int n = tempDeck.Count;
-		for (int i = 0; i < tempDeck.Count; i++) {
-			int k = Random.Range(i, tempDeck.Count - 1);
-			CardController tempCard = tempDeck[k];
-			tempDeck[k] = tempDeck[i];
-			tempDeck[i] = tempCard;
-		}
-	    return tempDeck;
-	}
+    /* Creates a new CardModel */
+    public CardModel createCardModel(string cardType, string newId) {
+        CardModel newCard;
+        switch (cardType) {
+            case "cook":
+                goto default;
+            default:
+                newCard = new CardModel();
+                break;
 
-	// shuffles discardDeck into currentDeck
-	public List<CardController> handleShuffleDiscardToDeck() {
-		List<CardController> tempCurrentDeck = currentDeck;
-		List<CardController> tempDiscardDeck = discardDeck;
-		foreach(CardController card in tempDiscardDeck) {
-			tempCurrentDeck.Add(card);
-		};
-		discardDeck = new List<CardController>(); // clear discard list
-		currentDeck = tempCurrentDeck;
-		return shuffleCurrentDeck();
-	}
+        };
+        newCard.Id = newId;
+        return newCard;
+    }
 
-	// Creates a new CardController and adds it to the deck
-	public CardController createCard(string cardType, string newId) {
-		CardController newCard;
-		switch (cardType) {
-			case "cook":
-				newCard = new CookCard();
-				break;
-			default:
-				newCard = new CardController();
-				break;
+    /* sets the current deck to the original deck then shuffles it, clears the discard list */
+    public List<CardElement> handleResetDeck () {
+        unknownList = new List<CardElement>(); // clear this mystery list
+        discardDeck = new List<CardElement>(); // clear discard list
+        currentDeck = completeDeck.GetRange(0, completeDeck.Count); // make a shallow copy of the original deck
+        return this.shuffleCurrentDeck();
+    }
 
-		};
-		newCard.setId(newId);
-		return newCard;
-	}
+    // -- helpers
+    public string printList(List<CardElement> list) {
+        string print = "";
+        foreach (CardElement card in list) {
+            print = print + ", " + card.Model.Id;
+        }
+        Debug.Log(print);
+        return print;
+    }
 
-	// sets the current deck to the original deck then shuffles it, clears the discard list
-	public List<CardController> handleResetDeck () {
-		unknownList = new List<CardController>(); // clear this mystery list
-		discardDeck = new List<CardController>(); // clear discard list
-    	currentDeck = completeDeck.GetRange(0, completeDeck.Count); // make a shallow copy of the original deck
-    	return shuffleCurrentDeck();
-	}
-
-	// - helpers
-	public string printList(List<CardController> list) {
-		string print = "";
-		foreach (CardController card in list) {
-			print = print + ", " + card.getName();
-		}
-		Debug.Log(print);
-		return print;
-	}
-
-	// 
-	public CardController getCardInUnknownList(CardController card) {
-		return unknownList.Find(item => item.getId() == card.getId());
-	}
-	public List<CardController> getCompleteDeck() {
-		return completeDeck;
-	}
-	public List<CardController> getCurrentDeck() {
-		return currentDeck;
-	}
-	public List<CardController> getDiscardDeck() {
-		return discardDeck;
-	}
+    // 
+    public CardElement getCardInUnknownList(CardElement card) {
+        return unknownList.Find(item => item.Model.Id == card.Model.Id);
+    }
 }

@@ -2,149 +2,160 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardView : BaseView {
-	// view
-	private string animationState; // name of the animation being used
-	private bool destroyOnUse; // destroy this card GameObject after being used?
-	
-	private float animationTimeDefault = 22;
-	private float animationTime;
-	private Vector3 animStartPos;
-	private Vector3 animEndPos;
+public class CardView : MonoBehaviour, BaseView {
+    public CardElement Element;
 
-	// data
-	public string defaultCardText;
-	public Vector3 handRelativePosition; // this card's position in the hand
+    // view timing
+    private int timer = 0; // animation time remaining
 
-	private TextMesh cardTextMesh;
-	private ParticleSystem SelectedParticleSystem;
+    // animation data to be set
+    public string animationName; // name of the animation being used
+    public string animationType = null; // name of the animation being used
+    public int animationTime; // length of animation
+    public Vector3 start; // animation start position
+    public List<Vector3> midpoints;
+    public Vector3 end; // animation end position
+    public bool destroyAfterAnimation; // destroy this card GameObject after animating
 
-	// Use this for initialization
-	void Start () {
-		GameObject CardTextObject = transform.Find("CardText").gameObject;
-		cardTextMesh = CardTextObject.GetComponent<TextMesh>();
-		setDisplayText(defaultCardText);
+    // data
+    public string defaultCardText; // todo fix this
+    public Vector3 handRelativePosition; // this card's position in the hand
 
-		GameObject ParticleObject = transform.Find("CardSelectedParticles").gameObject;
-		SelectedParticleSystem = ParticleObject.GetComponent<ParticleSystem>();
-		var emission = SelectedParticleSystem.emission;
-		emission.enabled = false;
+    private TextMesh cardTextMesh;
+    private ParticleSystem SelectedParticleSystem;
 
-		// prepare for animation
-		transform.localScale = Vector3.zero;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Start() {
+        GameObject CardTextObject = transform.Find("CardText").gameObject;
+        cardTextMesh = CardTextObject.GetComponent<TextMesh>();
+        setDisplayText(defaultCardText);
 
-		if (animationTime > 0) {
-			float animPercent = 1.0f - (animationTime / animationTimeDefault);
+        GameObject ParticleObject = transform.Find("CardSelectedParticles").gameObject;
+        SelectedParticleSystem = ParticleObject.GetComponent<ParticleSystem>();
+        var emission = SelectedParticleSystem.emission;
+        emission.enabled = false;
 
-			// animate drawing a card
-			if (animationState == "drawing") {
-				transform.localScale = Vector3.one * animPercent;
-				Vector3 pointB = animEndPos - animStartPos;
-				transform.position = CurveHelper.getQuadraticBezier(animStartPos, pointB, animEndPos, animPercent);
-			}
-			// animate the card being used
-			if (animationState == "consuming") {
-				Vector3 pointB = new Vector3(animStartPos.x + 1, animStartPos.y + 1.5f, animStartPos.z);
-				transform.position = CurveHelper.getQuadraticBezier(animStartPos, pointB, animEndPos, animPercent);
-			}
-			// basic movement
-			if (animationState == "moving") {
-				transform.position = Vector3.MoveTowards(transform.position, animEndPos, Time.deltaTime * 10);
-			}
+        // prepare for animation
+        transform.localScale = Vector3.zero;
+    }
+    
+    void Update() {
+        if (timer > 0) {
+            float animPercent = 1.0f - ((float)timer / (float)animationTime);
 
-			// done animating a frame
-			animationTime --;
+            // -- type
+            if (animationType == AnimationConstants.QUADRATIC_ANIM_TYPE) {
+                transform.position = CurveHelper.getQuadraticBezier(start, midpoints[0], end, animPercent);
+            }
+            if (animationType == AnimationConstants.LINEAR_ANIM_TYPE) {
+                // todo fix this
+                transform.position = CurveHelper.getQuadraticBezier(start, (end - start), end, animPercent);
+            }
 
-			if (animationTime == 0) {
-				animationState = null;
+            // -- card specific
+            if (animationName == CardConstants.DRAW_CARD_ANIM) {    
+                transform.localScale = Vector3.one * animPercent;
+            }
 
-				if (destroyOnUse) {
-					handleViewDestroy();
-				}
-			}
-		}
-	}
+            // done animating a frame
+            timer --;
 
-	// - animations - called from Controller
-	// when the card was drawn
-	public void animateDrawCard(Vector3 start) {
-		if (canAnimate()) {
-			animationState = "drawing";
-			animationTimeDefault = 13;
-			animStartPos = start;
-			animEndPos = CardConstants.handCenterPosition;
-			animationTime = animationTimeDefault;
-			destroyOnUse = false;
-		}
-	}
-	// when the card was used
-	public void animateUseCard() {
-		if (canAnimate()) {
-			animationState = "consuming";
-			Vector3 curPos = transform.position;
-			animStartPos = curPos;
-			animEndPos = new Vector3(curPos.x + 3, curPos.y - 3, curPos.z);
-			animationTimeDefault = 22;
-			animationTime = animationTimeDefault;
-			destroyOnUse = true;
-		}
-	}
-	// causes moveTowards
-	public void moveToPosition(Vector3 newPos) {
-		animStartPos = transform.position;
-		animEndPos = newPos;
+            if (timer == 0) {
+                animationType = null;
+                this.handleViewDoneAnimation();
 
-		if (canAnimate()) {
-			animationState = "moving";
-			animationTimeDefault = 55;
-			animationTime = animationTimeDefault;
-		}
-	}
+                if (destroyAfterAnimation) {
+                    this.handleDestroy();
+                }
+            }
+        }
+    }
 
-	// - setters
-	public void setDisplayText(string newText) {
-		if (cardTextMesh != null) {
-			cardTextMesh.text = newText;
-		} else {
-			defaultCardText = newText;
-		}
-	}
+    // -- animations
+    public void handleUpdate(string animName) {
+        if (this.isAnimatable()) {
+            if (animName == CardConstants.DRAW_CARD_ANIM) {
+                this.handleDrawCardAnimation();
+            } else if (animName == CardConstants.USE_CARD_ANIM) {
+                this.handleUseCardAnimation();
+            } else if (animName == CardConstants.MOVE_CARD_ANIM) {
+                this.setAnimationDefaultData(CardConstants.MOVE_CARD_ANIM, CardConstants.MOVE_CARD_ANIM_TIME);
+                animationType = AnimationConstants.LINEAR_ANIM_TYPE;
+            }
+        }
+    }
 
-	// - getters
-	public override bool isInteractable() {
-		if (animationTime == 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	public override bool canAnimate() {
-		if (animationTime == 0 && animationState == null) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    /* animate when the card was drawn */
+    public void handleDrawCardAnimation() {
+        this.setAnimationDefaultData(CardConstants.DRAW_CARD_ANIM, CardConstants.DRAW_CARD_ANIM_TIME);
+        animationType = AnimationConstants.LINEAR_ANIM_TYPE;
+    }
 
-	// MonoBehavior
-	void OnMouseUp() {
-		if (controller != null && isInteractable()) {
-			controller.OnViewMouseUp();
-		}
-	}
+    /* animate when the card was used */
+    public void handleUseCardAnimation() {
+        this.setAnimationDefaultData(CardConstants.USE_CARD_ANIM, CardConstants.USE_CARD_ANIM_TIME);
+        destroyAfterAnimation = true;
+        animationType = AnimationConstants.QUADRATIC_ANIM_TYPE;
 
-	void OnMouseOver() {
-		var emission = SelectedParticleSystem.emission;
-		emission.enabled = true;
-	}
+        Vector3 currPos = transform.position;
+        end = new Vector3(currPos.x + 1, currPos.y - 1.5f, currPos.z);
 
-	void OnMouseExit() {
-		var emission = SelectedParticleSystem.emission;
-		emission.enabled = false;
-	}
+        Vector3 pointB = end - start;
+        midpoints = new List<Vector3> { pointB };
+    }
+
+    // -- helpers
+    /* handles setting a basic set up for animation data */
+    private void setAnimationDefaultData(string newAnimName, int newAnimTime) {
+        // reset some stuff
+        destroyAfterAnimation = false;
+        midpoints = new List<Vector3>();
+
+        // set
+        start = transform.position;
+        end = Element.Model.Position;
+
+        animationName = newAnimName;
+        animationTime = newAnimTime;
+        timer = newAnimTime;
+    }
+    public void setDisplayText(string newText) {
+        if (cardTextMesh != null) {
+            cardTextMesh.text = newText;
+        } else {
+            defaultCardText = newText;
+        }
+    }
+    public bool isInteractable() {
+        return timer == 0;
+    }
+    public bool isAnimatable() {
+        return timer == 0 && (animationType == null || animationType == "");
+    }
+
+    // -- MonoBehavior
+    void OnMouseUp() {
+        if (this.isInteractable()) {
+            Element.Controller.handleOnMouseUp();
+        }
+    }
+
+    void OnMouseOver() {
+        var emission = SelectedParticleSystem.emission;
+        emission.enabled = true;
+    }
+
+    void OnMouseExit() {
+        var emission = SelectedParticleSystem.emission;
+        emission.enabled = false;
+    }
+
+    // -- interface implementation
+    public void handleViewDoneAnimation() {
+        Element.Controller.handleOnDoneAnimation();
+    }
+    public void handleDestroy() {
+        Element.Controller.handleViewBeforeDestroy();
+        Destroy(gameObject);
+    }
 
 }

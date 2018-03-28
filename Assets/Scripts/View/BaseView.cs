@@ -3,24 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /*
-	view
+    view interface
 */
-public class BaseView : MonoBehaviour {	
-	public BaseController controller;
+public interface BaseView { 
+    void handleUpdate(string animName); // called by Model to update View
+    void handleDestroy(); // should implement to tell Model this View will be destroyed
+    void handleViewDoneAnimation(); // called when animation is done
 
-	public virtual bool isInteractable() { return true; }
-	public virtual bool canAnimate() { return true; }
-
-	// - update from model
-	public virtual void update() {}
-
-	// - called from controller
-	public void setController(BaseController newController) {
-		this.controller = newController;
-	}
-	// - setters
-	public void handleViewDestroy() {
-		controller.OnViewWillDestroy(this);
-		Destroy(gameObject);
-	}
+    bool isAnimatable(); // can this be animated
 }
