@@ -35,13 +35,13 @@ public class CardElement {
     }
 
     /* creates a new Card (View and Controller) and adds it to our Hand */
-    public CardElement instantiateElement() {
+    public CardElement instantiateElement(Vector3 startPos, Vector3 endPos) {
         CardModel newModel = this.createCardModel();
 
         // instantiate GameObject
-        Vector3 newCardPos = Vector3.zero;
+        Vector3 newCardPos = startPos;
         GameObject newCardObject = Instantiator.instantiateCard(newCardPos);
-        newModel.Position = CardConstants.handCenterPosition;
+        newModel.Position = endPos;
 
         // get the View from GameObject and set relevent data
         CardView newView = newCardObject.transform.GetComponent<CardView>();        
@@ -53,7 +53,11 @@ public class CardElement {
 
         return this;
     }
+    public CardElement instantiateElement() {
+        return this.instantiateElement(Vector3.zero, CardConstants.handCenterPosition);
+    }
 
+    /* sets the MVC relationships */
     public CardElement createMVC(CardModel m, CardView v, CardController c) {
         Model = m;
         View = v;
