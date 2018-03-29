@@ -577,9 +577,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1318845984}
-  - component: {fileID: 1318845983}
-  - component: {fileID: 1318845985}
   - component: {fileID: 1318845986}
+  - component: {fileID: 1318845983}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -595,11 +594,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1318845982}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa53c2fa2c2654a0e913bc83c016f94e, type: 3}
+  m_Script: {fileID: 11500000, guid: 63a5703e1dcd6459c904092b9fdb64e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _ChallengeController: {fileID: 0}
-  _GameInstantiator: {fileID: 0}
 --- !u!4 &1318845984
 Transform:
   m_ObjectHideFlags: 0
@@ -613,17 +610,6 @@ Transform:
   m_Father: {fileID: 1904169324}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1318845985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1318845982}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67495a5c4769e4ee08f818340b64b5a0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1318845986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -786,7 +772,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1904169324}
   m_Layer: 0
-  m_Name: Controllers
+  m_Name: Managers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

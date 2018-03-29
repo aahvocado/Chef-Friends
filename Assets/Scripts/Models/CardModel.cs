@@ -7,7 +7,7 @@ using UnityEngine;
 */
 public class CardModel : BaseModel {
     // [SerializeField]
-    public PlayerController Owner;
+    public PlayerManager Owner;
     public CardElement Element;
     public string Id;
 

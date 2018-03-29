@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,23 +7,20 @@ using UnityEngine;
     
     #singleton
 */
-public class GameController : MonoBehaviour {
+public class GameManager : MonoBehaviour {
     // singletons
-    public ChallengeController _ChallengeController;
     // public GameInstantiator _GameInstantiator;
 
     // player stuff
-    PlayerController Player1;
-    PlayerController Player2;
+    PlayerManager Player1;
+    // PlayerManager Player2;
 
     // Use this for initialization
     void Start () {
         // get singletons
-        _ChallengeController = ChallengeController.getInstance;
         // _GameInstantiator = GameInstantiator.getInstance;
 
-        //
-        Player1 = new PlayerController();
+        Player1 = new PlayerManager();
     }
 
     // Update is called once per frame
@@ -33,12 +30,11 @@ public class GameController : MonoBehaviour {
 
     // uses the Cook card
     public void useCook(int power) {
-        _ChallengeController.applyCook(power);
     }
 
     // create singleton
-    private static GameController _instance;
-    public static GameController getInstance { get { return _instance; } }
+    private static GameManager _instance;
+    public static GameManager getInstance { get { return _instance; } }
     private void Awake() {
         if (_instance != null && _instance != this) {
             Destroy(this.gameObject);

@@ -1,31 +1,29 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /*
     Player
-    TODO MAYBE THIS IS NOT A CONTROLLER
-     manages their hands and their decks
 */
-public class PlayerController {
-    public GameController _GameController;
-    public GameInstantiator _GameInstantiator;
+public class PlayerManager {
+    public GameManager _GameManager;
+    private GameInstantiator _GameInstantiator;
 
     public int defaultHandSize = 1;
     private int currentHandSize;
 
-    public DeckController deckController;
+    public DeckManager deckManager;
     public List<CardElement> currentHandList; // TODO HandModel
 
-    public PlayerController() {
+    public PlayerManager() {
         // get singletons
-        _GameController = GameController.getInstance;
+        _GameManager = GameManager.getInstance;
         _GameInstantiator = GameInstantiator.getInstance;
 
         // set stuff
         currentHandSize = defaultHandSize;
         currentHandList = new List<CardElement>();
-        deckController = new DeckController();
+        deckManager = new DeckManager();
 
         this.instanciateHandView();
     }
@@ -59,7 +57,7 @@ public class PlayerController {
         currentHandList = new List<CardElement>();
 
         for (int i = 0; i < currentHandSize; i++) {
-            CardElement card = deckController.drawCard();
+            CardElement card = deckManager.drawCard();
             this.createNewCard(card);
         }
 

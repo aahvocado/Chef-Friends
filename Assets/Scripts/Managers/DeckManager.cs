@@ -1,18 +1,18 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /*
     Class that handles Deck
 */
-public class DeckController {
+public class DeckManager {
     // data
     private List<CardElement> completeDeck; // original complete deck
     private List<CardElement> currentDeck; // currently in the deck
     private List<CardElement> discardDeck; // discard pile
     private List<CardElement> unknownList; // cards in neither currentDeck nor discardDeck, probably in Hand
 
-    public DeckController () {
+    public DeckManager () {
         completeDeck = this.createDeck(CardConstants.defaultDeckList); // make a new deck and set default to it
         this.handleResetDeck(); // sets up currentDeck and discardDeck
     }
