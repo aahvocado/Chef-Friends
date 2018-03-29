@@ -48,9 +48,13 @@ public class DeckManager {
     public List<CardElement> createDeck(List<string> cardList) {
         List<CardElement> tempDeck = new List<CardElement>();
         for (int i = 0; i < cardList.Count; i++) {
-            string newId = i + "";
             string newCardType = cardList[i];
-            CardElement newCard = new CardElement(this.createCardModel(newCardType, newId));
+            CardElement newCard = new CardElement();
+
+            // set stuff to be created
+            newCard.ID = "id-" + i;
+            newCard.CardType = cardList[i];
+
             tempDeck.Add(newCard);
         };
         return tempDeck;
@@ -81,21 +85,6 @@ public class DeckManager {
         return this.shuffleCurrentDeck();
     }
 
-    /* Creates a new CardModel */
-    public CardModel createCardModel(string cardType, string newId) {
-        CardModel newCard;
-        switch (cardType) {
-            case "cook":
-                goto default;
-            default:
-                newCard = new CardModel();
-                break;
-
-        };
-        newCard.Id = newId;
-        return newCard;
-    }
-
     /* sets the current deck to the original deck then shuffles it, clears the discard list */
     public List<CardElement> handleResetDeck () {
         unknownList = new List<CardElement>(); // clear this mystery list
@@ -108,7 +97,7 @@ public class DeckManager {
     public string printList(List<CardElement> list) {
         string print = "";
         foreach (CardElement card in list) {
-            print = print + ", " + card.Model.Id;
+            print = print + ", " + card.Model.name;
         }
         Debug.Log(print);
         return print;
@@ -116,6 +105,6 @@ public class DeckManager {
 
     // 
     public CardElement getCardInUnknownList(CardElement card) {
-        return unknownList.Find(item => item.Model.Id == card.Model.Id);
+        return unknownList.Find(item => item.ID == card.ID);
     }
 }

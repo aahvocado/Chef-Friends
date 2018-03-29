@@ -6,61 +6,37 @@ using UnityEngine;
     Player
 */
 public class PlayerManager {
-    public GameManager _GameManager;
-    private GameInstantiator _GameInstantiator;
+    // public GameManager Game;
 
-    public int defaultHandSize = 1;
+    private DeckManager Deck;
+    private HandManager Hand;
+
+    public int defaultHandSize = 3;
     private int currentHandSize;
 
-    public DeckManager deckManager;
-    public List<CardElement> currentHandList; // TODO HandModel
-
     public PlayerManager() {
-        // get singletons
-        _GameManager = GameManager.getInstance;
-        _GameInstantiator = GameInstantiator.getInstance;
+        // Game = GameManager.getInstance;
+        currentHandSize = defaultHandSize;
 
         // set stuff
-        currentHandSize = defaultHandSize;
-        currentHandList = new List<CardElement>();
-        deckManager = new DeckManager();
+        Deck = new DeckManager();
+        Hand = new HandManager();
 
-        this.instanciateHandView();
+        // new stuff
+        this.setupHandList();
     }
 
-    /* creates a new Card (View and Controller) and adds it to our Hand, Model should already exist by now */
-    public CardElement createNewCard(CardElement newElement) {
-        currentHandList.Add(newElement);
-
-        // instantiate GameObject
-        Vector3 newCardPos = Vector3.zero;
-        GameObject newCardObject = _GameInstantiator.instantiateCard(newCardPos);
-        newElement.Model.Position = CardConstants.handCenterPosition;
-
-        // get the View from GameObject and set relevent data
-        CardView newView = newCardObject.transform.GetComponent<CardView>();        
-        newView.setDisplayText(newElement.Model.name + " " + newElement.Model.Id);
-
-        // assign MVC and finish
-        CardController newController = new CardController();
-        CardModel newModel = newElement.Model;
-        newElement.createMVC(newModel, newView, newController);
-
-        // animations
-        newElement.View.handleUpdate(CardConstants.DRAW_CARD_ANIM);
-
-        return newElement;
-    }
-
-    /* makes a new list of cards in the current Hand */
-    public List<CardElement> instanciateHandView() {
-        currentHandList = new List<CardElement>();
+    /* returns a CardElement list for the current Hand */
+    public List<CardElement> setupHandList() {
+        List<CardElement> handList = new List<CardElement>();
 
         for (int i = 0; i < currentHandSize; i++) {
-            CardElement card = deckManager.drawCard();
-            this.createNewCard(card);
+            CardElement card = Deck.drawCard();
+            handList.Add(card);
         }
 
-        return currentHandList;
+        Hand.instanciateHandView(handList);
+
+        return handList;
     }
 }

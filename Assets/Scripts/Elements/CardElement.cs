@@ -7,14 +7,51 @@ using UnityEngine;
      how to make a base for this...
 */
 public class CardElement {
+    private GameInstantiator Instantiator;
+    public string ID;
+    public string CardType;
+
     public CardModel Model;
     public CardView View;
     public CardController Controller;
 
-    public CardElement(CardModel m) {
-        // trying to always require a Model
-        Model = m;
-        Model.Element = this;
+    public CardElement() {
+        Instantiator = GameInstantiator.getInstance;
+    }
+
+    /* Creates a new CardModel */
+    public CardModel createCardModel() {
+        CardModel newModel;
+
+        switch (CardType) {
+            case "cook":
+                goto default;
+            default:
+                newModel = new CardModel();
+                break;
+        }
+
+        return newModel;
+    }
+
+    /* creates a new Card (View and Controller) and adds it to our Hand */
+    public CardElement instantiateElement() {
+        CardModel newModel = this.createCardModel();
+
+        // instantiate GameObject
+        Vector3 newCardPos = Vector3.zero;
+        GameObject newCardObject = Instantiator.instantiateCard(newCardPos);
+        newModel.Position = CardConstants.handCenterPosition;
+
+        // get the View from GameObject and set relevent data
+        CardView newView = newCardObject.transform.GetComponent<CardView>();        
+        newView.setDisplayText(newModel.name);
+
+        // assign MVC and finish
+        CardController newController = new CardController();
+        this.createMVC(newModel, newView, newController);
+
+        return this;
     }
 
     public CardElement createMVC(CardModel m, CardView v, CardController c) {
@@ -30,7 +67,7 @@ public class CardElement {
     }
 
     /* checks if all MVC elements are assigned */
-    public bool isComplete() {
+    public bool isInstantiated() {
         return Model != null && View != null && Controller != null;
     }
 }

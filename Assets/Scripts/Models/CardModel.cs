@@ -7,9 +7,7 @@ using UnityEngine;
 */
 public class CardModel : BaseModel {
     // [SerializeField]
-    public PlayerManager Owner;
     public CardElement Element;
-    public string Id;
 
     public Vector3 Position; // where the view will end up
     
