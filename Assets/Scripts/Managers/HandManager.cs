@@ -42,15 +42,14 @@ public class HandManager {
     public Vector3 getNextPosition(int position, int total) {
         Vector3 defaultPosition = CardConstants.handCenterPosition;
 
-        bool odd = position % 2 == 1;
-        if (odd) {
-            defaultPosition.x += 0.75f;
-        } else {
-            defaultPosition.x -= 0.75f;
-        }
+        // bool odd = position % 2 == 1;
+        // if (odd) {
+        //     defaultPosition.x += 0.75f;
+        // } else {
+        //     defaultPosition.x -= 0.75f;
+        // }
 
-        float y_margins = 1.5f;
-        defaultPosition.y = CardConstants.handBoundsVertical - (y_margins * position);
+        defaultPosition.y = CardConstants.handBoundsVertical - (CardConstants.cardSize * position);
 
         // Debug.Log("pos: " + defaultPosition);
         return defaultPosition;

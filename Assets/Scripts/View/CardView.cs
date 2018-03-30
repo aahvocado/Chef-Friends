@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CardView : MonoBehaviour, BaseView {
     public CardElement Element;
@@ -21,18 +22,17 @@ public class CardView : MonoBehaviour, BaseView {
     public string defaultCardText; // todo fix this
     public Vector3 handRelativePosition; // this card's position in the hand
 
-    private TextMesh cardTextMesh;
-    private ParticleSystem SelectedParticleSystem;
+    private Text textComponent;
+    private RectTransform rectTransform;
+
+    void Awake() {
+        rectTransform = GetComponent<RectTransform>();
+    }
 
     void Start() {
-        GameObject CardTextObject = transform.Find("CardText").gameObject;
-        cardTextMesh = CardTextObject.GetComponent<TextMesh>();
+        GameObject CardTextObject = transform.Find("UI_Text").gameObject;
+        textComponent = CardTextObject.GetComponent<Text>();
         setDisplayText(defaultCardText);
-
-        GameObject ParticleObject = transform.Find("CardSelectedParticles").gameObject;
-        SelectedParticleSystem = ParticleObject.GetComponent<ParticleSystem>();
-        var emission = SelectedParticleSystem.emission;
-        emission.enabled = false;
 
         // prepare for animation
         transform.localScale = Vector3.zero;
@@ -44,11 +44,10 @@ public class CardView : MonoBehaviour, BaseView {
 
             // -- type
             if (animationType == AnimationConstants.QUADRATIC_ANIM_TYPE) {
-                transform.position = CurveHelper.getQuadraticBezier(start, midpoints[0], end, animPercent);
+                rectTransform.anchoredPosition = CurveHelper.getQuadraticBezier(start, midpoints[0], end, animPercent);
             }
             if (animationType == AnimationConstants.LINEAR_ANIM_TYPE) {
-                // todo fix this
-                transform.position = CurveHelper.getQuadraticBezier(start, (end - start), end, animPercent);
+                rectTransform.anchoredPosition = CurveHelper.getQuadraticBezier(start, (end - start), end, animPercent);
             }
 
             // -- card specific
@@ -96,7 +95,7 @@ public class CardView : MonoBehaviour, BaseView {
         destroyAfterAnimation = true;
         animationType = AnimationConstants.QUADRATIC_ANIM_TYPE;
 
-        Vector3 currPos = transform.position;
+        Vector3 currPos = GetComponent<RectTransform>().anchoredPosition;
         end = new Vector3(currPos.x + 1, currPos.y - 1.5f, currPos.z);
 
         Vector3 pointB = end - start;
@@ -111,7 +110,7 @@ public class CardView : MonoBehaviour, BaseView {
         midpoints = new List<Vector3>();
 
         // set
-        start = transform.position;
+        start = GetComponent<RectTransform>().anchoredPosition;
         end = Element.Model.Position;
 
         animationName = newAnimName;
@@ -119,8 +118,8 @@ public class CardView : MonoBehaviour, BaseView {
         timer = newAnimTime;
     }
     public void setDisplayText(string newText) {
-        if (cardTextMesh != null) {
-            cardTextMesh.text = newText;
+        if (textComponent != null) {
+            textComponent.text = newText;
         } else {
             defaultCardText = newText;
         }
@@ -140,13 +139,11 @@ public class CardView : MonoBehaviour, BaseView {
     }
 
     void OnMouseOver() {
-        var emission = SelectedParticleSystem.emission;
-        emission.enabled = true;
+
     }
 
     void OnMouseExit() {
-        var emission = SelectedParticleSystem.emission;
-        emission.enabled = false;
+
     }
 
     // -- interface implementation

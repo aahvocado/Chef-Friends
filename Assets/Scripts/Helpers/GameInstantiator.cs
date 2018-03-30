@@ -8,9 +8,11 @@ using UnityEngine;
 	#singleton
 */
 public class GameInstantiator : MonoBehaviour {
+    private GameObject Canvas;
 
 	// Use this for initialization
 	void Start () {
+        Canvas = GameObject.Find("Canvas");
 	}
 
 	//
@@ -23,9 +25,10 @@ public class GameInstantiator : MonoBehaviour {
 
 	//
 	public GameObject instantiateCard (Vector3 defaultPos) {
-		GameObject newCard = Instantiate(Resources.Load("Prefabs/CardComponent", typeof(GameObject))) as GameObject;
+		GameObject newCard = Instantiate(Resources.Load("Prefabs/UI_Prefabs/UI_BrickButton", typeof(GameObject))) as GameObject;
 		Transform cardTransform = newCard.transform;
 		cardTransform.position = defaultPos;
+        cardTransform.SetParent(Canvas.transform);
 		return newCard;
 	}
 

@@ -6,11 +6,11 @@ public class CardConstants {
     public static List<string> defaultDeckList = new List<string> { "ingredient", "ingredient", "cook", "cook", "cook" };
 
 	// arbitrary sizing
-	public static float cardSize = 2.5f;
+	public static float cardSize = 55f;
 
 	// hand size positining info
 	public static float handBoundsVertical = 4.6f;
-	public static Vector3 handCenterPosition = new Vector3(6.6f, 0f, -2f);
+	public static Vector3 handCenterPosition = new Vector3(200f, 0f, 0f);
 
 	// animation
 	public static string DRAW_CARD_ANIM = "draw-card-animation";
