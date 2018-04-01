@@ -6,36 +6,54 @@ using UnityEngine.UI;
 public class CardView : MonoBehaviour, BaseView {
     public CardElement Element;
 
+    // properties
+    private RectTransform rectTransform;
+    public Vector3 Position {
+        get { return rectTransform.anchoredPosition; }
+    }
+
     // view timing
     private int timer = 0; // animation time remaining
 
-    // animation data to be set
-    public string animationName; // name of the animation being used
-    public string animationType = null; // name of the animation being used
+    // animation data
+    private string _animationName; // name of the animation being used
+    public string animationName {
+        get { return _animationName; }
+        set {
+            _animationName = value;
+            this.handleAnimationUpdate(value);
+        }
+    }
+    public string animationType; // name of the animation being used
     public int animationTime; // length of animation
-    public Vector3 start; // animation start position
-    public List<Vector3> midpoints;
-    public Vector3 end; // animation end position
+    public Vector3 Origin; // animation beginning position
+    public List<Vector3> PathPoints;
+    public Vector3 Destination { // animation end position
+        get { return Element.Model.Position; }
+    }
     public bool destroyAfterAnimation; // destroy this card GameObject after animating
 
     // data
-    public string defaultCardText; // todo fix this
-    public Vector3 handRelativePosition; // this card's position in the hand
-
     private Text textComponent;
-    private RectTransform rectTransform;
+    private string _Text;
+    public string Text {
+        get { return _Text; }
+        set {
+            _Text = value;
+            textComponent.text = value;
+        }
+    }
+    // public Vector3 handRelativePosition; // this card's position in the hand
 
     void Awake() {
+        GameObject CardTextObject = transform.Find("UI_Text").gameObject;
+        textComponent = CardTextObject.GetComponent<Text>();
         rectTransform = GetComponent<RectTransform>();
     }
 
     void Start() {
-        GameObject CardTextObject = transform.Find("UI_Text").gameObject;
-        textComponent = CardTextObject.GetComponent<Text>();
-        setDisplayText(defaultCardText);
 
-        // prepare for animation
-        transform.localScale = Vector3.zero;
+        // transform.localScale = Vector3.zero;
     }
     
     void Update() {
@@ -44,10 +62,10 @@ public class CardView : MonoBehaviour, BaseView {
 
             // -- type
             if (animationType == AnimationConstants.QUADRATIC_ANIM_TYPE) {
-                rectTransform.anchoredPosition = CurveHelper.getQuadraticBezier(start, midpoints[0], end, animPercent);
+                rectTransform.anchoredPosition = CurveHelper.getQuadraticBezier(Origin, PathPoints[0], Destination, animPercent);
             }
             if (animationType == AnimationConstants.LINEAR_ANIM_TYPE) {
-                rectTransform.anchoredPosition = CurveHelper.getQuadraticBezier(start, (end - start), end, animPercent);
+                rectTransform.anchoredPosition = CurveHelper.getQuadraticBezier(Origin, PathPoints[0], Destination, animPercent);
             }
 
             // -- card specific
@@ -70,19 +88,26 @@ public class CardView : MonoBehaviour, BaseView {
     }
 
     // -- animations
-    public void handleUpdate(string animName) {
+    public void handleAnimationUpdate(string animName) {
         if (this.isAnimatable()) {
             if (animName == CardConstants.DRAW_CARD_ANIM) {
                 this.handleDrawCardAnimation();
+
             } else if (animName == CardConstants.USE_CARD_ANIM) {
                 this.handleUseCardAnimation();
+
             } else if (animName == CardConstants.MOVE_CARD_ANIM) {
                 this.setAnimationDefaultData(CardConstants.MOVE_CARD_ANIM, CardConstants.MOVE_CARD_ANIM_TIME);
                 animationType = AnimationConstants.LINEAR_ANIM_TYPE;
             }
+            
+            // Debug.Log("handleAnimationUpdate data " + Origin + " ... " + PathPoints[0] + " ... " + Destination);
         }
     }
-
+    /* called when Model's position has changed */
+    public void handlePositionUpdate() {
+        this.handleAnimationUpdate(CardConstants.MOVE_CARD_ANIM);
+    }
     /* animate when the card was drawn */
     public void handleDrawCardAnimation() {
         this.setAnimationDefaultData(CardConstants.DRAW_CARD_ANIM, CardConstants.DRAW_CARD_ANIM_TIME);
@@ -95,11 +120,10 @@ public class CardView : MonoBehaviour, BaseView {
         destroyAfterAnimation = true;
         animationType = AnimationConstants.QUADRATIC_ANIM_TYPE;
 
-        Vector3 currPos = GetComponent<RectTransform>().anchoredPosition;
-        end = new Vector3(currPos.x + 1, currPos.y - 1.5f, currPos.z);
+        // Destination = new Vector3(Position.x + 1, Position.y - 1.5f, Position.z);
 
-        Vector3 pointB = end - start;
-        midpoints = new List<Vector3> { pointB };
+        Vector3 midpoint = (Destination + Origin) / 2;
+        PathPoints = new List<Vector3> { midpoint };
     }
 
     // -- helpers
@@ -107,22 +131,16 @@ public class CardView : MonoBehaviour, BaseView {
     private void setAnimationDefaultData(string newAnimName, int newAnimTime) {
         // reset some stuff
         destroyAfterAnimation = false;
-        midpoints = new List<Vector3>();
+
+        Vector3 midpoint = (Destination + Origin) / 2;
+        PathPoints = new List<Vector3> { midpoint };
 
         // set
-        start = GetComponent<RectTransform>().anchoredPosition;
-        end = Element.Model.Position;
+        Origin = Position;
 
-        animationName = newAnimName;
+        // animationName = newAnimName;
         animationTime = newAnimTime;
         timer = newAnimTime;
-    }
-    public void setDisplayText(string newText) {
-        if (textComponent != null) {
-            textComponent.text = newText;
-        } else {
-            defaultCardText = newText;
-        }
     }
     public bool isInteractable() {
         return timer == 0;
@@ -153,6 +171,15 @@ public class CardView : MonoBehaviour, BaseView {
     public void handleDestroy() {
         Element.Controller.handleViewBeforeDestroy();
         Destroy(gameObject);
+    }
+
+    /* trying to keep certain variables private */
+    public void setElement(CardElement e) {
+        Element = e;
+    }
+    public void setDefaultPosition(Vector3 pos) {
+        Origin = pos;
+        rectTransform.anchoredPosition = pos;
     }
 
 }

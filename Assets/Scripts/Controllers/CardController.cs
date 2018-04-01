@@ -27,11 +27,12 @@ public class CardController : BaseController {
     // -- override by derived
     public virtual void useCard() {}
 
-    // -- view
-    public void updateView(string animName) {
-        Element.View.handleUpdate(animName);
-    }
     public void handleViewBeforeDestroy() {
         Element.View = null;
+    }
+
+    /* trying to keep the Element variable private */
+    public void setElement(CardElement e) {
+        Element = e;
     }
 }

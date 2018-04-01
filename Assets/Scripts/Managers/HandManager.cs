@@ -15,10 +15,10 @@ public class HandManager {
 
     /* creates a new Card (View and Controller) and adds it to our Hand, Model should already exist by now */
     public CardElement createNewCard(CardElement Card, int index, int total) {
-        Card.instantiateElement(Vector3.zero, this.getNextPosition(index, total));
+        Card.instantiateElement(CardConstants.handStartPosition, this.getNextPosition(index, total));
 
-        // animations
-        Card.View.handleUpdate(CardConstants.DRAW_CARD_ANIM);
+        // // animations
+        // Card.View.handleUpdate(CardConstants.DRAW_CARD_ANIM);
 
         return Card;
     }
@@ -40,16 +40,9 @@ public class HandManager {
 
     /* find next Hand position */
     public Vector3 getNextPosition(int position, int total) {
-        Vector3 defaultPosition = CardConstants.handCenterPosition;
+        Vector3 defaultPosition = CardConstants.handStartPosition;
 
-        // bool odd = position % 2 == 1;
-        // if (odd) {
-        //     defaultPosition.x += 0.75f;
-        // } else {
-        //     defaultPosition.x -= 0.75f;
-        // }
-
-        defaultPosition.y = CardConstants.handBoundsVertical - (CardConstants.cardSize * position);
+        defaultPosition.y = defaultPosition.y - (CardConstants.cardSize * position);
 
         // Debug.Log("pos: " + defaultPosition);
         return defaultPosition;

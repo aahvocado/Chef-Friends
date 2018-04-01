@@ -25,7 +25,8 @@ public class CardElement {
 
         switch (CardType) {
             case "cook":
-                goto default;
+                newModel = new CookCard();
+                break;
             default:
                 newModel = new CardModel();
                 break;
@@ -41,20 +42,22 @@ public class CardElement {
         // instantiate GameObject
         Vector3 newCardPos = startPos;
         GameObject newCardObject = Instantiator.instantiateCard(newCardPos);
-        newModel.Position = endPos;
 
-        // get the View from GameObject and set relevent data
+        // get the View from GameObject
         CardView newView = newCardObject.transform.GetComponent<CardView>();        
-        newView.setDisplayText(newModel.name);
 
-        // assign MVC and finish
+        // assign MVC so everyone knows each other
         CardController newController = new CardController();
         this.createMVC(newModel, newView, newController);
+
+        // update Model values - must be done after MVC is created
+        newModel.Position = endPos;
+        newModel.initModel();
 
         return this;
     }
     public CardElement instantiateElement() {
-        return this.instantiateElement(Vector3.zero, CardConstants.handCenterPosition);
+        return this.instantiateElement(CardConstants.handStartPosition, CardConstants.handStartPosition);
     }
 
     /* sets the MVC relationships */
@@ -63,15 +66,19 @@ public class CardElement {
         View = v;
         Controller = c;
 
-        Model.Element = this;
-        View.Element = this;
-        Controller.Element = this;
-
+        Model.setElement(this);
+        View.setElement(this);
+        Controller.setElement(this);
+        
         return this;
     }
 
     /* checks if all MVC elements are assigned */
     public bool isInstantiated() {
         return Model != null && View != null && Controller != null;
+    }
+
+    public Vector3 getViewPosition() {
+        return View.transform.position;
     }
 }

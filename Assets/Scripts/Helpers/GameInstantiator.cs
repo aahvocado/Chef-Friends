@@ -16,18 +16,9 @@ public class GameInstantiator : MonoBehaviour {
 	}
 
 	//
-	public GameObject instantiateDish (Vector3 defaultPos) {
-		GameObject newDish = Instantiate(Resources.Load("Prefabs/DishComponent", typeof(GameObject))) as GameObject;
-		Transform cardTransform = newDish.transform;
-		cardTransform.position = defaultPos;
-		return newDish;
-	}
-
-	//
 	public GameObject instantiateCard (Vector3 defaultPos) {
 		GameObject newCard = Instantiate(Resources.Load("Prefabs/UI_Prefabs/UI_BrickButton", typeof(GameObject))) as GameObject;
 		Transform cardTransform = newCard.transform;
-		cardTransform.position = defaultPos;
         cardTransform.SetParent(Canvas.transform);
 		return newCard;
 	}
@@ -35,8 +26,6 @@ public class GameInstantiator : MonoBehaviour {
 	//
 	public GameObject instantiateIngredient (Vector3 defaultPos) {
 		GameObject newCard = Instantiate(Resources.Load("Prefabs/IngredientComponent", typeof(GameObject))) as GameObject;
-		Transform cardTransform = newCard.transform;
-		cardTransform.position = defaultPos;
 		return newCard;
 	}
 

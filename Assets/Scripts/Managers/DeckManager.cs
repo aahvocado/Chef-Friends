@@ -96,8 +96,8 @@ public class DeckManager {
     // -- helpers
     public string printList(List<CardElement> list) {
         string print = "";
-        foreach (CardElement card in list) {
-            print = print + ", " + card.Model.name;
+        foreach (CardElement Element in list) {
+            print = print + ", " + Element.Model.Text;
         }
         Debug.Log(print);
         return print;
