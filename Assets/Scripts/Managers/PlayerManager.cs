@@ -6,8 +6,6 @@ using UnityEngine;
     Player
 */
 public class PlayerManager {
-    // public GameManager Game;
-
     private DeckManager Deck;
     private HandManager Hand;
 
@@ -15,7 +13,6 @@ public class PlayerManager {
     private int currentHandSize;
 
     public PlayerManager() {
-        // Game = GameManager.getInstance;
         currentHandSize = defaultHandSize;
 
         // set stuff

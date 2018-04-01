@@ -39,7 +39,6 @@ GameObject:
   - component: {fileID: 222047670203434696}
   - component: {fileID: 114526036809920114}
   - component: {fileID: 114125905317835522}
-  - component: {fileID: 114503982795685936}
   m_Layer: 5
   m_Name: UI_BrickButton
   m_TagString: Untagged
@@ -55,18 +54,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1916222426130454}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1045dc29111654a048aa4de9a2ecda67, type: 3}
+  m_Script: {fileID: 11500000, guid: 38dbaebea7f194cce960210b94c0cd96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animationName: 
   animationType: 
   animationTime: 0
-  start: {x: 0, y: 0, z: 0}
-  midpoints: []
-  end: {x: 0, y: 0, z: 0}
+  Origin: {x: 0, y: 0, z: 0}
+  PathPoints: []
   destroyAfterAnimation: 0
-  defaultCardText: 
-  handRelativePosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114428342670994760
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,26 +95,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: New Text
---- !u!114 &114503982795685936
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1916222426130454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1045dc29111654a048aa4de9a2ecda67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationName: 
-  animationType: 
-  animationTime: 0
-  start: {x: 0, y: 0, z: 0}
-  midpoints: []
-  end: {x: 0, y: 0, z: 0}
-  destroyAfterAnimation: 0
-  defaultCardText: 
-  handRelativePosition: {x: 0, y: 0, z: 0}
 --- !u!114 &114526036809920114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,7 +150,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 183.53934, y: 92.85571}
+  m_AnchoredPosition: {x: 220, y: 140}
   m_SizeDelta: {x: 190, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224784993365897342

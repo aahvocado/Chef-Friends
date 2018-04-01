@@ -19,6 +19,6 @@ public class CardConstants {
 	public static int USE_CARD_ANIM_TIME = 22;
 
 	public static string MOVE_CARD_ANIM = AnimationConstants.BASIC_ANIM;
-	public static int MOVE_CARD_ANIM_TIME = 20;
+	public static int MOVE_CARD_ANIM_TIME = 5;
 
 }

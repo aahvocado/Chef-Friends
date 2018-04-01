@@ -34,31 +34,30 @@ public class CardView : MonoBehaviour, BaseView {
     public bool destroyAfterAnimation; // destroy this card GameObject after animating
 
     // data
-    private Text textComponent;
-    private string _Text;
+    private UITextView UITextHandler;
     public string Text {
-        get { return _Text; }
+        get { return UITextHandler.Text; }
         set {
-            _Text = value;
-            textComponent.text = value;
+            if (UITextHandler == null) {
+                UITextHandler = new UITextView(transform.Find("UI_Text").gameObject);
+            }
+            UITextHandler.Text = value;
         }
     }
-    // public Vector3 handRelativePosition; // this card's position in the hand
 
     void Awake() {
-        GameObject CardTextObject = transform.Find("UI_Text").gameObject;
-        textComponent = CardTextObject.GetComponent<Text>();
         rectTransform = GetComponent<RectTransform>();
     }
 
     void Start() {
-
-        // transform.localScale = Vector3.zero;
     }
     
     void Update() {
         if (timer > 0) {
             float animPercent = 1.0f - ((float)timer / (float)animationTime);
+            if (timer - 1 == 0) {
+                animPercent = 1f;
+            }
 
             // -- type
             if (animationType == AnimationConstants.QUADRATIC_ANIM_TYPE) {

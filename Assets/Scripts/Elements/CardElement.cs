@@ -6,8 +6,7 @@ using UnityEngine;
     MVC Element
      how to make a base for this...
 */
-public class CardElement {
-    private GameInstantiator Instantiator;
+public class CardElement : SingletonHelper {
     public string ID;
     public string CardType;
 
@@ -16,7 +15,6 @@ public class CardElement {
     public CardController Controller;
 
     public CardElement() {
-        Instantiator = GameInstantiator.getInstance;
     }
 
     /* Creates a new CardModel */

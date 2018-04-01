@@ -1,15 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /*
     Super Awesome Game Controller
-    
-    #singleton
 */
 public class GameManager : MonoBehaviour {
-    // singletons
-    // public GameInstantiator _GameInstantiator;
+    // game stuff
+    private string GameState;
+
+    private ProgressView progressComponent;
+    private int _currentTurn;
+    public int CurrentTurn {
+        get { return _currentTurn; }
+        set {
+            _currentTurn = value;
+            progressComponent.Text = "Turn: " + _currentTurn;
+        }
+    }
+    public int turnInterval = 3;
 
     // player stuff
     PlayerManager Player1;
@@ -17,15 +27,15 @@ public class GameManager : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        // get singletons
-        // _GameInstantiator = GameInstantiator.getInstance;
-
         Player1 = new PlayerManager();
+        progressComponent = new ProgressView();
+
+        _currentTurn = 0;
+        CurrentTurn = _currentTurn;
     }
 
     // Update is called once per frame
     void Update () {
-        
     }
 
     // uses the Cook card
