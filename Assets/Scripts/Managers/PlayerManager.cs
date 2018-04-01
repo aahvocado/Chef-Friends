@@ -23,12 +23,12 @@ public class PlayerManager {
         this.setupHandList();
     }
 
-    /* returns a CardElement list for the current Hand */
-    public List<CardElement> setupHandList() {
-        List<CardElement> handList = new List<CardElement>();
+    /* returns a UIButtonElement list for the current Hand */
+    public List<UIButtonElement> setupHandList() {
+        List<UIButtonElement> handList = new List<UIButtonElement>();
 
         for (int i = 0; i < currentHandSize; i++) {
-            CardElement card = Deck.drawCard();
+            UIButtonElement card = Deck.drawCard();
             handList.Add(card);
         }
 

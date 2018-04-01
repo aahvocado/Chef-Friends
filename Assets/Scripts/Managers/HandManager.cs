@@ -7,14 +7,14 @@ using UnityEngine;
 */
 public class HandManager {
     // data
-    private List<CardElement> HandList;
+    private List<UIButtonElement> HandList;
 
     public HandManager () {
-        HandList = new List<CardElement>();
+        HandList = new List<UIButtonElement>();
     }
 
     /* creates a new Card (View and Controller) and adds it to our Hand, Model should already exist by now */
-    public CardElement createNewCard(CardElement Card, int index, int total) {
+    public UIButtonElement createNewCard(UIButtonElement Card, int index, int total) {
         Card.instantiateElement(CardConstants.handStartPosition, this.getNextPosition(index, total));
 
         // // animations
@@ -22,16 +22,16 @@ public class HandManager {
 
         return Card;
     }
-    public CardElement createNewCard(CardElement Card, int index) {
+    public UIButtonElement createNewCard(UIButtonElement Card, int index) {
         return this.createNewCard(Card, index, 3); // TODO fix
     }
     
     /* instantiates al the new list of cards in the current Hand */
-    public List<CardElement> instanciateHandView(List<CardElement> newHandList) {
-        HandList = new List<CardElement>();
+    public List<UIButtonElement> instanciateHandView(List<UIButtonElement> newHandList) {
+        HandList = new List<UIButtonElement>();
 
         for (int i = 0; i < newHandList.Count; i++) {
-            CardElement instantiatedCard = this.createNewCard(newHandList[i], i);
+            UIButtonElement instantiatedCard = this.createNewCard(newHandList[i], i);
             HandList.Add(instantiatedCard);
         }
 

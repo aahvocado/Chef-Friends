@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EggCard : CardModel {
+public class EggCard : UIButtonModel {
     public EggCard() {
 		
     }

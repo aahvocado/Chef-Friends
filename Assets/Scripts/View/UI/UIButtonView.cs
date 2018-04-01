@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CardView : MonoBehaviour, BaseView {
-    public CardElement Element;
+public class UIButtonView : MonoBehaviour, BaseView {
+    public UIButtonElement Element;
 
     // properties
     private RectTransform rectTransform;
@@ -173,7 +173,7 @@ public class CardView : MonoBehaviour, BaseView {
     }
 
     /* trying to keep certain variables private */
-    public void setElement(CardElement e) {
+    public void setElement(UIButtonElement e) {
         Element = e;
     }
     public void setDefaultPosition(Vector3 pos) {

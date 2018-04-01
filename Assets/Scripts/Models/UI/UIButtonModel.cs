@@ -5,9 +5,9 @@ using UnityEngine;
 /*
     card
 */
-public class CardModel : BaseModel {
+public class UIButtonModel : BaseModel {
     // [SerializeField]
-    private CardElement Element;
+    private UIButtonElement Element;
     private bool initialized;
 
     private Vector3 startPosition; // where the view currently is
@@ -35,13 +35,6 @@ public class CardModel : BaseModel {
         }
     }
 
-    // public int power;
-    // public string type;
-
-    public CardModel() {
-        
-    }
-
     /* we need to have the entire MVC set up before we can safely do anything */
     public virtual void initModel() {
         if (Element != null) {
@@ -52,7 +45,7 @@ public class CardModel : BaseModel {
     }
 
     /* trying to keep certain variables private */
-    public void setElement(CardElement e) {
+    public void setElement(UIButtonElement e) {
         Element = e;
     }
     public void setDefaultPosition(Vector3 pos) {

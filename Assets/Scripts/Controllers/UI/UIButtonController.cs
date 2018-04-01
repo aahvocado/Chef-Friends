@@ -5,12 +5,8 @@ using UnityEngine;
 /*
     base Controller class for Cards
 */
-public class CardController : BaseController {
-    public CardElement Element;
-
-    public CardController() {
-
-    }
+public class UIButtonController : BaseController {
+    public UIButtonElement Element;
 
     // when the card view was clicked
     public virtual void handleOnMouseUp() {
@@ -23,7 +19,6 @@ public class CardController : BaseController {
 
     // -- helpers
 
-
     // -- override by derived
     public virtual void useCard() {}
 
@@ -32,7 +27,7 @@ public class CardController : BaseController {
     }
 
     /* trying to keep the Element variable private */
-    public void setElement(CardElement e) {
+    public void setElement(UIButtonElement e) {
         Element = e;
     }
 }

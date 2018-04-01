@@ -6,27 +6,27 @@ using UnityEngine;
     MVC Element
      how to make a base for this...
 */
-public class CardElement : SingletonHelper {
+public class UIButtonElement : SingletonHelper {
     public string ID;
     public string CardType;
 
-    public CardModel Model;
-    public CardView View;
-    public CardController Controller;
+    public UIButtonModel Model;
+    public UIButtonView View;
+    public UIButtonController Controller;
 
-    public CardElement() {
+    public UIButtonElement() {
     }
 
-    /* Creates a new CardModel */
-    public CardModel createCardModel() {
-        CardModel newModel;
+    /* Creates a new UIButtonModel */
+    public UIButtonModel createUIButtonModel() {
+        UIButtonModel newModel;
 
         switch (CardType) {
             case "cook":
                 newModel = new CookCard();
                 break;
             default:
-                newModel = new CardModel();
+                newModel = new UIButtonModel();
                 break;
         }
 
@@ -34,18 +34,18 @@ public class CardElement : SingletonHelper {
     }
 
     /* creates a new Card (View and Controller) and adds it to our Hand */
-    public CardElement instantiateElement(Vector3 startPos, Vector3 endPos) {
-        CardModel newModel = this.createCardModel();
+    public UIButtonElement instantiateElement(Vector3 startPos, Vector3 endPos) {
+        UIButtonModel newModel = this.createUIButtonModel();
 
         // instantiate GameObject
         Vector3 newCardPos = startPos;
         GameObject newCardObject = Instantiator.instantiateCard(newCardPos);
 
         // get the View from GameObject
-        CardView newView = newCardObject.transform.GetComponent<CardView>();        
+        UIButtonView newView = newCardObject.transform.GetComponent<UIButtonView>();        
 
         // assign MVC so everyone knows each other
-        CardController newController = new CardController();
+        UIButtonController newController = new UIButtonController();
         this.createMVC(newModel, newView, newController);
 
         // update Model values - must be done after MVC is created
@@ -54,12 +54,12 @@ public class CardElement : SingletonHelper {
 
         return this;
     }
-    public CardElement instantiateElement() {
+    public UIButtonElement instantiateElement() {
         return this.instantiateElement(CardConstants.handStartPosition, CardConstants.handStartPosition);
     }
 
     /* sets the MVC relationships */
-    public CardElement createMVC(CardModel m, CardView v, CardController c) {
+    public UIButtonElement createMVC(UIButtonModel m, UIButtonView v, UIButtonController c) {
         Model = m;
         View = v;
         Controller = c;

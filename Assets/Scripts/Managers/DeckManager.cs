@@ -7,10 +7,10 @@ using UnityEngine;
 */
 public class DeckManager {
     // data
-    private List<CardElement> completeDeck; // original complete deck
-    private List<CardElement> currentDeck; // currently in the deck
-    private List<CardElement> discardDeck; // discard pile
-    private List<CardElement> unknownList; // cards in neither currentDeck nor discardDeck, probably in Hand
+    private List<UIButtonElement> completeDeck; // original complete deck
+    private List<UIButtonElement> currentDeck; // currently in the deck
+    private List<UIButtonElement> discardDeck; // discard pile
+    private List<UIButtonElement> unknownList; // cards in neither currentDeck nor discardDeck, probably in Hand
 
     public DeckManager () {
         completeDeck = this.createDeck(CardConstants.defaultDeckList); // make a new deck and set default to it
@@ -18,13 +18,13 @@ public class DeckManager {
     }
 
     /* draws the next card in the currentDeck */
-    public CardElement drawCard() {
+    public UIButtonElement drawCard() {
         if (currentDeck.Count <= 0) {
             this.handleShuffleDiscardToDeck();
             return this.drawCard();
         } else {
             // todo: implement a pop() method?
-            CardElement card = currentDeck[0]; // get the top card
+            UIButtonElement card = currentDeck[0]; // get the top card
             unknownList.Add(card);
             currentDeck.Remove(card); // remove it from current deck
             return card;
@@ -32,11 +32,11 @@ public class DeckManager {
     }
 
     /* puts given card into discardDeck */
-    public List<CardElement> discardCard(CardElement card) {
+    public List<UIButtonElement> discardCard(UIButtonElement card) {
         discardDeck.Add(card);
 
         // remove it from our unknown list
-        CardElement cardInUnknown = getCardInUnknownList(card);
+        UIButtonElement cardInUnknown = getCardInUnknownList(card);
         if (cardInUnknown != null) {
             unknownList.Remove(cardInUnknown);
         }
@@ -45,11 +45,11 @@ public class DeckManager {
     }
 
     /* creates the initial list of Card Elements for a new deck */
-    public List<CardElement> createDeck(List<string> cardList) {
-        List<CardElement> tempDeck = new List<CardElement>();
+    public List<UIButtonElement> createDeck(List<string> cardList) {
+        List<UIButtonElement> tempDeck = new List<UIButtonElement>();
         for (int i = 0; i < cardList.Count; i++) {
             string newCardType = cardList[i];
-            CardElement newCard = new CardElement();
+            UIButtonElement newCard = new UIButtonElement();
 
             // set stuff to be created
             newCard.ID = "id-" + i;
@@ -61,12 +61,12 @@ public class DeckManager {
     }
 
     /* reorders everything inside current deck */
-    public List<CardElement> shuffleCurrentDeck() {
-        List<CardElement> tempDeck = currentDeck;
+    public List<UIButtonElement> shuffleCurrentDeck() {
+        List<UIButtonElement> tempDeck = currentDeck;
         int n = tempDeck.Count;
         for (int i = 0; i < tempDeck.Count; i++) {
             int k = Random.Range(i, tempDeck.Count - 1);
-            CardElement tempCard = tempDeck[k];
+            UIButtonElement tempCard = tempDeck[k];
             tempDeck[k] = tempDeck[i];
             tempDeck[i] = tempCard;
         }
@@ -74,29 +74,29 @@ public class DeckManager {
     }
 
     /* shuffles discardDeck into currentDeck */
-    public List<CardElement> handleShuffleDiscardToDeck() {
-        List<CardElement> tempCurrentDeck = currentDeck;
-        List<CardElement> tempDiscardDeck = discardDeck;
-        foreach(CardElement card in tempDiscardDeck) {
+    public List<UIButtonElement> handleShuffleDiscardToDeck() {
+        List<UIButtonElement> tempCurrentDeck = currentDeck;
+        List<UIButtonElement> tempDiscardDeck = discardDeck;
+        foreach(UIButtonElement card in tempDiscardDeck) {
             tempCurrentDeck.Add(card);
         };
-        discardDeck = new List<CardElement>(); // clear discard list
+        discardDeck = new List<UIButtonElement>(); // clear discard list
         currentDeck = tempCurrentDeck;
         return this.shuffleCurrentDeck();
     }
 
     /* sets the current deck to the original deck then shuffles it, clears the discard list */
-    public List<CardElement> handleResetDeck () {
-        unknownList = new List<CardElement>(); // clear this mystery list
-        discardDeck = new List<CardElement>(); // clear discard list
+    public List<UIButtonElement> handleResetDeck () {
+        unknownList = new List<UIButtonElement>(); // clear this mystery list
+        discardDeck = new List<UIButtonElement>(); // clear discard list
         currentDeck = completeDeck.GetRange(0, completeDeck.Count); // make a shallow copy of the original deck
         return this.shuffleCurrentDeck();
     }
 
     // -- helpers
-    public string printList(List<CardElement> list) {
+    public string printList(List<UIButtonElement> list) {
         string print = "";
-        foreach (CardElement Element in list) {
+        foreach (UIButtonElement Element in list) {
             print = print + ", " + Element.Model.Text;
         }
         Debug.Log(print);
@@ -104,7 +104,7 @@ public class DeckManager {
     }
 
     // 
-    public CardElement getCardInUnknownList(CardElement card) {
+    public UIButtonElement getCardInUnknownList(UIButtonElement card) {
         return unknownList.Find(item => item.ID == card.ID);
     }
 }

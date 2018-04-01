@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ProgressView : MonoBehaviour, BaseView {
+public class ProgressHandler {
     // data
     private UITextView UITextHandler;
     public string Text {
@@ -14,11 +14,5 @@ public class ProgressView : MonoBehaviour, BaseView {
             }
             UITextHandler.Text = value;
         }
-    }
-
-    public void handleViewDoneAnimation() {
-    }
-    public void handleDestroy() {
-        Destroy(gameObject);
     }
 }

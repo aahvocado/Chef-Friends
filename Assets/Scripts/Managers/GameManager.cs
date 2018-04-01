@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour {
     // game stuff
     private string GameState;
 
-    private ProgressView progressComponent;
+    private ProgressHandler progressComponent;
     private int _currentTurn;
     public int CurrentTurn {
         get { return _currentTurn; }
@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         Player1 = new PlayerManager();
-        progressComponent = new ProgressView();
+        progressComponent = new ProgressHandler();
 
         _currentTurn = 0;
         CurrentTurn = _currentTurn;

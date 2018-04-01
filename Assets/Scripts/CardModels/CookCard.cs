@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CookCard : CardModel {
+public class CookCard : UIButtonModel {
     public CookCard() {
 		
     }
