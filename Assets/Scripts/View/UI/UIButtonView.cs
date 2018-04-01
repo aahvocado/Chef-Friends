@@ -22,7 +22,7 @@ public class UIButtonView : MonoBehaviour, IPointerUpHandler, BaseView {
         get { return _animationName; }
         set {
             _animationName = value;
-            this.handleAnimationUpdate(value);
+            this.handleUpdate(value);
         }
     }
     public string animationType; // name of the animation being used
@@ -88,7 +88,7 @@ public class UIButtonView : MonoBehaviour, IPointerUpHandler, BaseView {
     }
 
     // -- animations
-    public void handleAnimationUpdate(string animName) {
+    public void handleUpdate(string animName) {
         if (this.isAnimatable()) {
             if (animName == CardConstants.DRAW_CARD_ANIM) {
                 this.handleDrawCardAnimation();
@@ -101,12 +101,12 @@ public class UIButtonView : MonoBehaviour, IPointerUpHandler, BaseView {
                 animationType = AnimationConstants.LINEAR_ANIM_TYPE;
             }
             
-            // Debug.Log("handleAnimationUpdate data " + Origin + " ... " + PathPoints[0] + " ... " + Destination);
+            // Debug.Log("handleUpdate data " + Origin + " ... " + PathPoints[0] + " ... " + Destination);
         }
     }
     /* called when Model's position has changed */
     public void handlePositionUpdate() {
-        this.handleAnimationUpdate(CardConstants.MOVE_CARD_ANIM);
+        this.handleUpdate(CardConstants.MOVE_CARD_ANIM);
     }
     /* animate when the card was drawn */
     public void handleDrawCardAnimation() {

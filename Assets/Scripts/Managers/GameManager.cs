@@ -40,11 +40,9 @@ public class GameManager : MonoBehaviour {
 
     // clicked on UI
     public void onUseAction(IngredientElement Element) {
-        // Debug.Log("onUseAction IngredientElement");
         this.onUseAction((UIButtonElement)Element);
     }
     public void onUseAction(UIButtonElement Element) {
-        // Debug.Log("onUseAction UIButtonElement");
         CurrentTurn ++;
     }
 
