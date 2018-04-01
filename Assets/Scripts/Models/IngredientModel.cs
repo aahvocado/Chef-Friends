@@ -2,16 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EggCard : UIButtonModel {
-    public EggCard() {
+public class IngredientModel : UIButtonModel {
+    public IngredientModel() {
 		
     }
 
     public override void initModel() {
         base.initModel();
         
-        Text = "Egg";
-        // power = 1;
-        // type = "cook";
+        Text = "Ingredient";
     }
 }

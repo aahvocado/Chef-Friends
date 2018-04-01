@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UIButtonView : MonoBehaviour, BaseView {
+public class UIButtonView : MonoBehaviour, IPointerUpHandler, BaseView {
     public UIButtonElement Element;
 
     // properties
@@ -149,7 +150,7 @@ public class UIButtonView : MonoBehaviour, BaseView {
     }
 
     // -- MonoBehavior
-    void OnMouseUp() {
+    public void OnPointerUp(PointerEventData eventData) {
         if (this.isInteractable()) {
             Element.Controller.handleOnMouseUp();
         }

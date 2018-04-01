@@ -7,8 +7,10 @@ using UnityEngine;
 */
 public class SingletonHelper {
     public GameInstantiator Instantiator;
+    public GameManager Game;
 
     public SingletonHelper() {
         Instantiator = GameInstantiator.getInstance;
+        Game = GameManager.getInstance;
     }
 }

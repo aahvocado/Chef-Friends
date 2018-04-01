@@ -10,7 +10,7 @@ public class UIButtonController : BaseController {
 
     // when the card view was clicked
     public virtual void handleOnMouseUp() {
-        this.useCard();
+        this.handleAction();
     }
 
     public virtual void handleOnDoneAnimation() {
@@ -20,7 +20,9 @@ public class UIButtonController : BaseController {
     // -- helpers
 
     // -- override by derived
-    public virtual void useCard() {}
+    public virtual void handleAction() {
+        Element.Game.onUseAction(Element);
+    }
 
     public void handleViewBeforeDestroy() {
         Element.View = null;

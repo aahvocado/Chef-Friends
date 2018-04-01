@@ -38,8 +38,14 @@ public class GameManager : MonoBehaviour {
     void Update () {
     }
 
-    // uses the Cook card
-    public void useCook(int power) {
+    // clicked on UI
+    public void onUseAction(IngredientElement Element) {
+        // Debug.Log("onUseAction IngredientElement");
+        this.onUseAction((UIButtonElement)Element);
+    }
+    public void onUseAction(UIButtonElement Element) {
+        // Debug.Log("onUseAction UIButtonElement");
+        CurrentTurn ++;
     }
 
     // create singleton

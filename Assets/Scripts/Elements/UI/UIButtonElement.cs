@@ -7,24 +7,20 @@ using UnityEngine;
      how to make a base for this...
 */
 public class UIButtonElement : SingletonHelper {
-    public string ID;
+    public string ID; // todo - this needs to change...
     public string CardType;
 
     public UIButtonModel Model;
     public UIButtonView View;
     public UIButtonController Controller;
 
-    public UIButtonElement() {
-    }
-
     /* Creates a new UIButtonModel */
     public UIButtonModel createUIButtonModel() {
         UIButtonModel newModel;
-
         switch (CardType) {
             case "cook":
-                newModel = new CookCard();
-                break;
+                // newModel = new CookCard();
+                // break;
             default:
                 newModel = new UIButtonModel();
                 break;
@@ -34,7 +30,7 @@ public class UIButtonElement : SingletonHelper {
     }
 
     /* creates a new Card (View and Controller) and adds it to our Hand */
-    public UIButtonElement instantiateElement(Vector3 startPos, Vector3 endPos) {
+    public void instantiateElement(Vector3 startPos, Vector3 endPos) {
         UIButtonModel newModel = this.createUIButtonModel();
 
         // instantiate GameObject
@@ -51,15 +47,13 @@ public class UIButtonElement : SingletonHelper {
         // update Model values - must be done after MVC is created
         newModel.Position = endPos;
         newModel.initModel();
-
-        return this;
     }
-    public UIButtonElement instantiateElement() {
-        return this.instantiateElement(CardConstants.handStartPosition, CardConstants.handStartPosition);
+    public void instantiateElement() {
+        this.instantiateElement(CardConstants.handStartPosition, CardConstants.handStartPosition);
     }
 
     /* sets the MVC relationships */
-    public UIButtonElement createMVC(UIButtonModel m, UIButtonView v, UIButtonController c) {
+    public void createMVC(UIButtonModel m, UIButtonView v, UIButtonController c) {
         Model = m;
         View = v;
         Controller = c;
@@ -67,8 +61,6 @@ public class UIButtonElement : SingletonHelper {
         Model.setElement(this);
         View.setElement(this);
         Controller.setElement(this);
-        
-        return this;
     }
 
     /* checks if all MVC elements are assigned */

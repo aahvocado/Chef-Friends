@@ -3,4 +3,5 @@
 */
 public interface BaseController {
     void handleViewBeforeDestroy();
+    // void setElement();
 }
