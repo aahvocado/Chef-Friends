@@ -76,7 +76,7 @@ public class UIButtonView : MonoBehaviour, IPointerUpHandler, BaseView {
             // done animating a frame
             timer --;
 
-            if (timer == 0) {
+            if (timer <= 0) {
                 animationType = null;
                 this.handleViewDoneAnimation();
 
