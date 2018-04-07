@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CardConstants {
 	//
-    public static List<string> defaultDeckList = new List<string> { "ingredient", "ingredient", "cook", "cook", "cook" };
+    public static List<string> defaultDeckList = new List<string> { "ingredient", "ingredient", "ingredient", "cook", "cook" };
 
 	// arbitrary sizing
 	public static float cardSize = 60f;

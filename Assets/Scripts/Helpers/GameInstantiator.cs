@@ -16,16 +16,21 @@ public class GameInstantiator : MonoBehaviour {
 	}
 
 	//
-	public GameObject instantiateCard (Vector3 defaultPos) {
-		GameObject newCard = Instantiate(Resources.Load("Prefabs/UI_Prefabs/UI_BrickButton", typeof(GameObject))) as GameObject;
-		Transform cardTransform = newCard.transform;
-        cardTransform.SetParent(Canvas.transform);
-		return newCard;
-	}
+	public GameObject instantiateObject(string type) {
+        string resourcePath;
+        if (type == ObjectConstants.INGREDIENT_OBJ_TYPE) {
+            resourcePath = "Prefabs/UI_Prefabs/TEMP_Ingredient";
+        } else if (type == ObjectConstants.UI_BRICK_BUTTON_OBJ_TYPE) {
+            resourcePath = "Prefabs/UI_Prefabs/UI_BrickButton";
+        } else {
+            resourcePath = "Prefabs/UI_Prefabs/UI_BrickButton";
+        }
 
-	//
-	public GameObject instantiateIngredient (Vector3 defaultPos) {
-		GameObject newCard = Instantiate(Resources.Load("Prefabs/IngredientComponent", typeof(GameObject))) as GameObject;
+		GameObject newCard = Instantiate(Resources.Load(resourcePath, typeof(GameObject))) as GameObject;
+        if (type == ObjectConstants.UI_BRICK_BUTTON_OBJ_TYPE) {
+    		Transform cardTransform = newCard.transform;
+            cardTransform.SetParent(Canvas.transform);
+        }
 		return newCard;
 	}
 

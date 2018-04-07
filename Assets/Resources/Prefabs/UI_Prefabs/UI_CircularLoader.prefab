@@ -36,9 +36,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224895805365736626}
+  - component: {fileID: 114851651031136370}
   - component: {fileID: 222738397256524976}
   - component: {fileID: 114326398442679524}
-  - component: {fileID: 114851651031136370}
   m_Layer: 5
   m_Name: LoaderImage
   m_TagString: Untagged
@@ -160,6 +160,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abaa079255c44ea6988e9ec3fe8edc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isAnimating: 0
+  resetOnPress: 0
+  resetOnRelease: 0
+  resetOnFull: 0
+  animationTime: 50
 --- !u!114 &114872200735395072
 MonoBehaviour:
   m_ObjectHideFlags: 1

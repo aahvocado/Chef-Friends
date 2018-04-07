@@ -13,17 +13,12 @@ public class HandManager {
         HandList = new List<UIButtonElement>();
     }
 
-    /* creates a new Card (View and Controller) and adds it to our Hand, Model should already exist by now */
-    public UIButtonElement createNewCard(UIButtonElement Card, int index, int total) {
-        Card.instantiateElement(CardConstants.handStartPosition, this.getNextPosition(index, total));
-
-        // // animations
-        // Card.View.handleUpdate(CardConstants.DRAW_CARD_ANIM);
-
-        return Card;
+    public UIButtonElement createNewElement(UIButtonElement Element, int index, int total) {
+        Element.instantiateElement(CardConstants.handStartPosition, this.getNextPosition(index, total));
+        return Element;
     }
-    public UIButtonElement createNewCard(UIButtonElement Card, int index) {
-        return this.createNewCard(Card, index, 3); // TODO fix
+    public UIButtonElement createNewElement(UIButtonElement Element, int index) {
+        return this.createNewElement(Element, index, 3); // TODO fix
     }
     
     /* instantiates al the new list of cards in the current Hand */
@@ -31,8 +26,8 @@ public class HandManager {
         HandList = new List<UIButtonElement>();
 
         for (int i = 0; i < newHandList.Count; i++) {
-            UIButtonElement instantiatedCard = this.createNewCard(newHandList[i], i);
-            HandList.Add(instantiatedCard);
+            UIButtonElement instantiatedElement = this.createNewElement(newHandList[i], i);
+            HandList.Add(instantiatedElement);
         }
 
         return HandList;

@@ -48,12 +48,12 @@ public class DeckManager {
     public List<UIButtonElement> createDeck(List<string> cardList) {
         List<UIButtonElement> tempDeck = new List<UIButtonElement>();
         for (int i = 0; i < cardList.Count; i++) {
-            string newCardType = cardList[i];
+            string newType = cardList[i];
             UIButtonElement newCard = new UIButtonElement();
 
             // set stuff to be created
             newCard.ID = "id-" + i;
-            newCard.CardType = cardList[i];
+            newCard.Type = cardList[i];
 
             tempDeck.Add(newCard);
         };

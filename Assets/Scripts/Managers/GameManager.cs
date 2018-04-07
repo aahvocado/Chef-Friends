@@ -8,6 +8,7 @@ using UnityEngine.UI;
 */
 public class GameManager : MonoBehaviour {
     // game stuff
+    private SingletonHelper Singletons = new SingletonHelper();
     private string GameState;
 
     private ProgressHandler progressComponent;
@@ -36,14 +37,16 @@ public class GameManager : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+
     }
 
     // clicked on UI
-    public void onUseAction(IngredientElement Element) {
-        this.onUseAction((UIButtonElement)Element);
-    }
     public void onUseAction(UIButtonElement Element) {
+        this.handleUseAction(Element);
         CurrentTurn ++;
+    }
+    public void handleUseAction(UIButtonElement Element) {
+        Singletons.Instantiator.instantiateObject(Element.Type);
     }
 
     // create singleton

@@ -7,6 +7,7 @@ public class UICircularLoader : MonoBehaviour {
     public bool isAnimating;
     public bool resetOnPress;
     public bool resetOnRelease;
+    public bool resetOnFull;
 
     private int timer; // animation time remaining
     public int animationTime; // length of animation
@@ -27,7 +28,6 @@ public class UICircularLoader : MonoBehaviour {
 	void Start () {
 		imageScript = transform.gameObject.GetComponent<Image>();
         Percent = 0f;
-        animationTime = 30;
 	}
 
     void Update() {
@@ -42,12 +42,16 @@ public class UICircularLoader : MonoBehaviour {
             timer --;
 
             if (timer <= 0) {
-                isAnimating = false;
                 // this.handleViewDoneAnimation();
 
                 // if (destroyAfterAnimation) {
                 //     this.handleDestroy();
                 // }
+
+                if (resetOnFull) {
+                    timer = animationTime;
+                    Percent = 0f;
+                }
             }
         }
     }
@@ -60,7 +64,7 @@ public class UICircularLoader : MonoBehaviour {
     public void handlePointerDown() {
         if (resetOnPress) {
             timer = animationTime;
-        } else if (timer == null || timer == 0) {
+        } else if (timer == 0) {
             timer = animationTime;
         }
         isAnimating = true;
